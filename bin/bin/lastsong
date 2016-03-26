@@ -1,7 +1,0 @@
-#!/bin/sh
-
-if [ -f "/tmp/lastsong" ]; then
-	mpc stop
-	rm "/tmp/lastsong"
-	ciao
-fi
