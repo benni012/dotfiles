@@ -1,0 +1,6 @@
+#!/bin/sh
+tmux new-session -d 'cava'
+tmux split-window -v 'ncmpcpp'
+tmux split-window -h 'irssi'
+tmux split-window -l 17 -h 'zsh -c "cat .irssi/nicklistfifo"'
+tmux -2 attach-session -d

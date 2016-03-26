@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if [ -f "/tmp/lastsong" ]; then
+	rm "/tmp/lastsong"
+else
+	touch "/tmp/lastsong"
+fi

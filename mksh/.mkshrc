@@ -1,0 +1,13 @@
+#!/bin/mksh
+
+# source the config files
+for conf in ~/.sh.d/*; do
+  . $conf
+done
+
+set -o posix
+set -o bgnice
+set -U
+
+export GROFF_NO_SGR=1
+# vim:ft=sh

@@ -1,0 +1,15 @@
+#!/bin/sh
+#
+# wildefyr - 2016 (c) wtfpl
+# exports mkb varaibles
+
+COL1="%{B#66D7D7D7}"
+COL2="%{B#6614161A}"
+
+START=$COL1
+SEP=$COL2
+END=$COL2
+CHAR1=" "
+CHAR2=" "
+SIZE=20
+export SIZE CHAR1 CHAR2 START END SEP

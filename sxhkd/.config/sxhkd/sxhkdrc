@@ -1,0 +1,15 @@
+# volume/playback controls, herbst does not support the extra mouse buttons
+super + button8
+	mpc prev
+
+super + button9
+	mpc next
+
+super + button12
+	mpc toggle
+
+super + shift + button8
+	vol -
+
+super + shift + button9
+	vol +

@@ -1,0 +1,9 @@
+#!/bin/sh
+# Collects all files in subdirs and copies them to given dir
+
+if [ -z $1 ]; then
+	echo "usage: "$(basename "$0")" dir"
+	exit 1
+fi
+
+find -type f | xargs -I % sh -c "cp -i % \"$1\""

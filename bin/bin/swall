@@ -1,0 +1,14 @@
+#!/bin/sh
+
+function usage {
+	echo "Usage: $(basename $0) [FILE]"
+	exit 0
+}
+
+file="$1"
+
+if [ "$file" = "" ]; then
+	usage
+fi
+
+cat "$file" | convert - -modulate 125%,75%,100% -level +25% -blur 20x10 - | feh --bg-fill -

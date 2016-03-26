@@ -1,0 +1,41 @@
+#define bg    #23202c
+#define fg    #bfbec3
+#define blk   #272432
+#define bblk  #56525f
+#define red   #af6c69
+#define grn   #7e9c80
+#define ylw   #b29c7c
+#define blu   #637b81
+#define mag   #896e72
+#define cyn   #5a8585 
+#define wht   #bfbec3
+
+*.foreground: fg
+*.background: bg
+*.cursorColor: ylw
+*.highlightColor: #009688
+*.highlightTextColor: #ef9a9a
+
+*.color0:            blk
+*.color8:            blk
+
+*.color1:            red
+*.color9:            red
+
+*.color2:            grn
+*.color10:           grn
+
+*.color3:            ylw
+*.color11:           ylw
+
+*.color4:            blu
+*.color12:           blu
+
+*.color5:            mag
+*.color13:           mag
+
+*.color6:            cyn
+*.color14:           cyn
+
+*.color7:            wht
+*.color15:           wht

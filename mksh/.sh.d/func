@@ -1,0 +1,22 @@
+#!/bin/sh
+
+function lsfilme {
+	ls -1 /data/Filme
+}
+
+function filme {
+	cd /
+	rm -f /tmp/filme
+	find /data/Filme -type f \( -iname "*.mkv" -o -iname "*.mp4" -o -iname "*.avi" \) -print0 | \
+	xargs -0 -i% bash -c '{ echo $(basename "%")\ $(vidlen "%") >>/tmp/filme; }'
+	sort /tmp/filme | column -t | altcolor
+	cd - > /dev/null
+}
+
+function bd {
+	sudo mount /dev/sr0 /mnt/cd;
+	play_bd "$@";
+	sudo umount /mnt/cd;
+}
+
+# vim:ft=sh

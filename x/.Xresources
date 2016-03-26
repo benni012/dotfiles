@@ -1,0 +1,41 @@
+!#include ".xres.d/solarized"
+!#include ".xres.d/sourcerer"
+!#include ".xres.d/eighties"
+!#include ".xres.d/base16"
+!#include ".xres.d/gotham"
+!#include ".xres.d/gruvbox"
+!#include ".xres.d/hybrid"
+!#include ".xres.d/hybrid-loco"
+
+!#include ".xres.d/nvo"
+#include ".xres.d/smear"
+!#include ".xres.d/ayy"
+!#include ".xres.d/fyry"
+!#include ".xres.d/raiin"
+!#include ".xres.d/cloudy"
+
+urxvt*scrollBar: false
+urxvt*highlightColor: #2f2f2f
+urxvt*internalBorder:  20
+urxvt*skipBuiltinGlyps: true
+
+!urxvt*depth: 32
+!*background: rgba:2000/2400/2c00/c800
+
+urxvt*font:			xft:PragmataPro:size=16
+!urxvt*font:			-*-tewi-medium-*-*-*-11-*-*-*-*-*-iso10646-*
+!urxvt*font:			xft:tamsyn
+!urxvt*font:			-*-gohufont-medium-*-*-*-14-*-*-*-*-*-iso10646-*
+!urxvt*font:			-*-candy-*-*-*-*-11-*-*-*-*-*-*-*
+!urxvt*boldFont:		-*-candy-*-*-*-*-11-*-*-*-*-*-*-*
+!urxvt*font:			*-lemon-*
+!urxvt*boldFont:		*-lemon-*
+
+!xft.antialias: 1
+!xft.autohint: 0
+!xft.hinting: 1
+!xft.hintstyle: hintfull
+!xft.rgba: rgb
+!xft.lcdfilter:  lcddefault
+
+!xft.dpi: 92

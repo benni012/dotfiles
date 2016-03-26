@@ -1,0 +1,16 @@
+#!/bin/sh
+
+w=${1:-740}
+h=${2:-450}
+
+# herbstluftwm sucks with wmutils
+fb=$(ppw $(pfw))
+fw=$(pfw)
+
+xb=$(wattr x $fb)
+yb=$(wattr y $fb)
+
+xw=$(wattr x $fw)
+yw=$(wattr y $fw)
+
+wtp $((xb+xw)) $((yb+yw-30)) $w $h $fw

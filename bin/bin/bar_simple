@@ -1,0 +1,53 @@
+#!/bin/mksh
+# TODO Playstate animation
+
+clock() {
+	date "+%d.%m.%Y %H:%M"
+}
+
+volume() {
+	printf '%4s' $(vol level)
+}
+
+song() {
+	cur=$(mpc current)
+	if [ -n "$cur" ]; then
+		echo "$cur"
+	else
+		echo "empty"
+	fi
+}
+
+net() {
+	ping -c 1 8.8.8.8 >/dev/null 2>&1 && echo "connected" || echo "disconnected"
+}
+
+desktop() {
+  desktop_name=$(xprop -root _NET_CURRENT_DESKTOP | awk '{print $3}')
+  if [ $desktop_name = "0" ]; then
+    printf '%s\n' '%{F#81a2be}⮫%{F-} ⮬ ⮭ ⮮'
+  elif [ $desktop_name = "1" ]; then
+    printf '%s\n' '⮫ %{F#81a2be}⮬%{F-} ⮭ ⮮'
+  elif [ $desktop_name = "2" ]; then
+    printf '%s\n' '⮫ ⮬ %{F#81a2be}⮭%{F-} ⮮'
+  elif [ $desktop_name = "3" ]; then
+    printf '%s\n' '⮫ ⮬ ⮭ %{F#81a2be}⮮%{F-}'
+  fi
+}
+
+playstate() {
+	status=$(mpc status | grep "\[" | awk '{print $1}')
+	if [ "$status" = "[playing]" ]; then
+		printf '⮔'
+	else
+		printf '⮓'
+	fi
+}
+
+while :; do
+	buf=""
+	buf="${buf} %{F#81a2be}⮖%{F-} $(clock)"
+	buf="${buf} %{c}$(desktop)"
+	buf="${buf} %{r}%{F#81a2be}⮕%{F-} $(song)"
+	echo " $buf  "
+done | lemonbar -B "#161719" -F "#c5c8c6" -f "*-lemon-*" -g 1920x25

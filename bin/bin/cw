@@ -1,0 +1,14 @@
+#!/bin/sh
+
+fw=$(ppw $(pfw))
+
+sw=1920
+sh=1080
+
+ww=$(wattr w $fw)
+wh=$(wattr h $fw)
+
+x=$((sw/2 - ww/2))
+y=$((sh/2 - wh/2 - 30))
+
+wtp $x $y $ww $wh $fw

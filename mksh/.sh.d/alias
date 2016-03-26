@@ -1,0 +1,30 @@
+#!/bin/sh
+alias ls="ls --color=auto --group-directories-first"
+alias l="ls --color=auto --group-directories-first -1"
+alias ll="ls -lh --color=auto --group-directories-first"
+alias la="ls -lah --color=auto --group-directories-first"
+alias "cd.."="cd ../"
+alias tree='tree -CAFa -I "CVS|*.*.package|.svn|.git|.hg|node_modules|bower_components" --dirsfirst'
+alias rock="ncmpcpp"
+alias mixer="alsamixer"
+alias matrix="cmatrix -b"
+alias pacman="sudo pacman"
+alias disks='echo "╓───── m o u n t . p o i n t s"; echo "╙────────────────────────────────────── ─ ─ "; lsblk -a; echo ""; echo "╓───── d i s k . u s a g e"; echo "╙────────────────────────────────────── ─ ─ "; df -h;'
+alias bai="exit"
+alias qb="qbittorrent &! exit"
+alias ayy="fortune | cowsay -n | lolcat"
+alias subl="sublime_text"
+alias alsi="alsi -l"
+alias eject="eject -T"
+alias play_bd="mpv -vo vdpau -vd-lavc-threads 8 br:////mnt/cd"
+alias gitr="find -maxdepth 1 -type d | xargs -I % zsh -c '{ if [ -d \"%/.git\" ]; then echo \"% => \"; cd \"%\"; git pull; echo; cd -; fi }'"
+alias pac="bash ~/code/fun/pacman"
+alias tclock="watch -tn1 'date +%T | toilet -f future --gay'"
+alias syu="pacman -Syu"
+alias sau="yaourt -Sau"
+alias startx="startx /etc/X11/xinit/xinitrc"
+alias rnb="toilet --gay -f"
+alias vim="nvim"
+alias :q="exit"
+
+# vim:ft=sh

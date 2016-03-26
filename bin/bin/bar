@@ -1,0 +1,2 @@
+#!/bin/mksh
+lemonbar -B "#00161719" -F "#c5c8c6" -f "*-lemon-*" -g 1920x30 "$@" | mksh

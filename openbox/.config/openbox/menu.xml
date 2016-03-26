@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openbox_menu xmlns="http://openbox.org/3.4/menu">
+
+<menu id="launch-menu" label="launch">
+	<item label="firefox">
+		<action name="Execute"><command>firefox</command></action>
+	</item>
+	<separator />
+	<item label="atom">
+		<action name="Execute"><command>atom</command></action>
+	</item>
+	<separator />
+	<item label="sublime text">
+		<action name="Execute"><command>sublime_text</command></action>
+	</item>
+</menu>
+
+<menu id="system-menu" label="system">
+	<item label="reconfigure openbox">
+		<action name="Reconfigure" />
+	</item>
+	<separator />
+	<item label="screenshot">
+		<action name="Execute"><command>maim</command></action>
+	</item>
+</menu>
+
+<menu id="root-menu" label="Openbox 3">
+	<item label="urxvt">
+		<action name="Execute"><command>urxvt</command></action>
+	</item>
+	<separator />
+	<item label="termite">
+		<action name="Execute"><command>termite</command></action>
+	</item>
+	<separator />
+	<menu id="launch-menu"/>
+	<separator />
+	<menu id="system-menu"/>
+</menu>
+
+</openbox_menu>

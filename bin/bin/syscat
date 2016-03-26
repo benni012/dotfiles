@@ -1,0 +1,63 @@
+#!/bin/sh
+
+COLOR=${COLOR:-15}
+
+c() { tput setaf $COLOR; }
+d() { tput sgr0; }
+
+#BATC="/sys/class/power_supply/BAT0/capacity"
+#BATS="/sys/class/power_supply/BAT0/status"
+
+system() {
+    echo "arch linux"
+}
+
+cpuinfo() {
+    sed -n "/model\ name/s/^.*:\ //p" /proc/cpuinfo | sed 1q
+}
+
+mydate() {
+    date
+}
+
+wmname() {
+#    echo "none"
+    echo "herbstluftwm"
+#    xprop -root WM_NAME | cut -d\" -f2
+}
+
+fontname() {
+    echo "PragmataPro"
+}
+
+cat <<EOF
+
+$(c)SYSTEM    $(d)$(system)
+$(c)KERNEL    $(d)$(uname -r)
+$(c)HOSTNAME  $(d)$(hostname)
+$(c)WMNAME    $(d)$(wmname)
+$(c)TERMINAL  $(d)$TERM
+$(c)SHELL     $(d)$SHELL
+$(c)FONT      $(d)$(fontname)
+$(c)PROC      $(d)$(cpu -p)
+$(c)MEMORY    $(d)$(memory -u | xargs numfmt --to=iec-i --suffix=B)
+$(c)DATE      $(d)$(mydate)
+
+EOF
+
+for col in 0 1 2 3 4 5 6 7; do
+  tput setaf $col
+  printf %s '>>> '
+done
+echo
+for col in 8 9 10 11 12 13 14 15; do
+  tput setaf $col
+  printf %s '<<< '
+done
+tput sgr0
+echo
+echo
+
+case $1 in
+  -s) maim sys.png ;;
+esac

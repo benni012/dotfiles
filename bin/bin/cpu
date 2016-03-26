@@ -1,0 +1,34 @@
+#!/bin/sh
+#
+# z3bra - (c) wtfpl 2014
+
+usage () {
+    cat <<EOF
+usage: $(basename $0) [-hp]
+    -h : print help
+    -p : percentage of cpu used (default)
+    -n : number of running processes
+    -t : temperature
+EOF
+}
+
+cpuperc () {
+    LINE=`ps -eo pcpu |grep -vE '^\s*(0.0|%CPU)' |sed -n '1h;$!H;$g;s/\n/ +/gp'`
+
+    echo "`echo $LINE | bc`%"
+}
+
+cpunumb() {
+    ls /proc | grep -oE '^[0-9]*$' | wc -w
+}
+
+cputemp() {
+  sensors | cut -d: -f 2 | sed '3!d;s/+//;s/\..*//;s/\ //g'
+}
+
+case $1 in
+    -h) usage;;
+    -n) cpunumb;;
+    -t) cputemp ;;
+     *) cpuperc;;
+esac

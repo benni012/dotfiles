@@ -1,0 +1,14 @@
+#!/bin/zsh
+
+if [ $# -lt 2 ]; then
+	exit
+fi
+
+if [ -n "$3" ]; then
+	bc <<< "obase=$2; ibase=$1; $(tr '[a-f]' '[A-F]' <<< $3)" | tr -d '\\\n'
+else
+	while IFS='' read -r LINE || [[ -n "$LINE" ]]; do
+		bc <<< "obase=$2; ibase=$1; $(tr '[a-f]' '[A-F]' <<< $LINE)" | tr -d '\\\n'
+	done
+fi
+# | sed 's/(.)/ | xargs -I % mksh -c '{ cut -c $(( % + 1 )) <<< "0123456789abcdefghijklmnopqrstuvwxyz"; }'

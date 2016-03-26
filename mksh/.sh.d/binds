@@ -1,0 +1,5 @@
+#!/bin/sh
+
+bind ^L=clear-screen
+
+# vim:ft=sh

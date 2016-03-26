@@ -1,0 +1,7 @@
+#!/bin/sh
+
+monitor_width=$(xrandr | grep "primary" | awk -F'[ x+]' '{print $4}')
+font="-benis-lemon-medium-r-normal--10-110-75-75-m-50-ISO8859-1"
+
+#dmenu_run -s 0 -nf "#71c2af" -nb "#273941" -sb "#1d2a30" -sf "#c27171" -i -h 30 -w "${monitor_width}" -q -x 0 -y 30 -fn "${font}" -p ">" -l 3
+dmenu_run -s 0 -nf "#c5c8c6" -nb "#161719" -sb "#161719" -sf "#70a070" -i -h 30 -w "${monitor_width}" -q -x 0 -y 0 -fn "${font}" -p ">_"
