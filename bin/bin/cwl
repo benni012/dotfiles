@@ -1,4 +1,4 @@
-color=$(cat ~/Desktop/colors | grep -F "#" | shuf -n1)
+color=$(cat ~/.colors | grep -F "#" | shuf -n1)
 hsetroot -solid "$color" $@
 
 echo -e "background color set to \e[33m$color\e[0m"
