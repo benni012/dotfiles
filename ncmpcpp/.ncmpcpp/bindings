@@ -21,3 +21,6 @@ def_key "d"
 
 def_key "-"
 	jump_to_parent_directory
+
+def_command "q" [deferred]
+	quit
