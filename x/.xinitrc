@@ -32,11 +32,6 @@ hsetroot -solid "#002b36" -tile ~/patterns/pattern.png
 
 # Fontpath
 xset +fp /home/ben/.local/share/fonts
-xset +fp /usr/share/fonts/jmk
-xset +fp /usr/share/fonts/zevv-peep
-xset +fp /usr/share/fonts/zevv-peep
-xset +fp /usr/share/fonts/local
-xset +fp /usr/share/fonts/misc/
 xset fp rehash
 
 # start compositor
