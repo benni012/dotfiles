@@ -4,6 +4,12 @@ def_key "k"
 def_key "j"
   scroll_down
 
+def_key "h"
+	previous_column
+
+def_key "l"
+	next_column
+
 def_key "ctrl-u"
 	page_up
 
@@ -12,3 +18,6 @@ def_key "ctrl-d"
 
 def_key "d"
 	delete_playlist_items
+
+def_key "-"
+	jump_to_parent_directory
