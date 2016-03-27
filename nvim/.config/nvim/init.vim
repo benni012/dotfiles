@@ -11,7 +11,7 @@ colorscheme term
 " }}}
 " plugins {{{
 
-call plug#begin('~/.vimplug')
+call plug#begin()
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-sensible'
 Plug 'jamessan/vim-gnupg'
