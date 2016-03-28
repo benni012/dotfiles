@@ -24,3 +24,6 @@ def_key "-"
 
 def_command "q" [deferred]
 	quit
+
+def_key ";"
+	show_lyrics
