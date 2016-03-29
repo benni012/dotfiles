@@ -176,7 +176,7 @@ autocmd BufReadPost *.doc,*.docx,*.rtf,*.odp,*.odt silent %!pandoc "%" -tplain -
 autocmd BufWritePre *.java,*.c,*.cpp,*.html,*.css,*.txt :%s/\s\+$//e
 
 " c set compiler
-autocmd BufRead *.c set makeprg=cc\ %
+autocmd BufRead,BufNewFile *.c set makeprg=cc\ %
 
 " pnc (Pro and Contra) filetype
 autocmd BufRead,BufNewFile *.pnc set filetype=pnc
