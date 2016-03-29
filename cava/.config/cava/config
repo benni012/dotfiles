@@ -3,7 +3,7 @@
 [general]
 mode = normal # smoothing mode, can be normal, scientific or waves.
 framerate = 60 # Default: 60. Accepts only non-negative values.
-sensitivity = 100 #  is sensitivity %. Accepts only non-negative values.
+sensitivity = 2 #  is sensitivity %. Accepts only non-negative values.
 bars = 0 # the number of bars. 0 sets it to auto (fil upp console). 
 bar_width = 3 # width of bars. 
 bar_spacing = 1 # space between bars.
@@ -12,8 +12,8 @@ higher_cutoff_freq = 10000 # the higher cutoff frequency for the far right bar. 
 
 
 [input]
-method = fifo # supported input methods are 'alsa' or 'fifo'.
-source = /tmp/mpd.fifo # ALSA device or FIFO path.
+method = pulse # supported input methods are 'alsa' or 'fifo'.
+source = alsa_output.pci-0000_00_1b.0.analog-stereo.monitor # ALSA device or FIFO path.
 
 [output]
 method = ncurses # method used to draw output may be ncurses, noncurses or circle.
