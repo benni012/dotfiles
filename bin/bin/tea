@@ -1,0 +1,5 @@
+#!/bin/sh
+
+while :; do
+	echo "%{A:(sleep 5 && notify-send \"Tea's done!\") & exit:}8m%{A}"
+done | bar
