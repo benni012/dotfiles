@@ -8,3 +8,5 @@ weechat/.weechat/logs
 
 ncmpcpp/.ncmpcpp/error.log
 ncmpcpp/.ncmpcpp/patterns.list
+
+bin/bin/tea
