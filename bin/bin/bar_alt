@@ -1,8 +1,8 @@
 #!/bin/mksh
 
 #c="%{F#508050}"
-c="%{F#70a070}"
-#c="%{F#81a2be}"
+c="%{F#81a2be}"
+#c="%{F#70a070}"
 
 e="%{F-}"
 
@@ -26,14 +26,6 @@ song() {
 		echo "$cur"
 	else
 		echo "empty"
-	fi
-}
-
-lsong() {
-	if [ -f "/tmp/lastsong" ]; then
-		echo "%{F#b06a58}"
-	else
-		echo "$c"
 	fi
 }
 
@@ -61,14 +53,14 @@ playstate() {
 
 while :; do
 	buf=""
-	buf="${buf} $c⮖$e $(clock)"
+	buf="${buf} %{A:tea:}$c⮖$e%{A} $(clock)"
 	buf="${buf} %{c}$(desktop)"
-	buf="${buf} %{r}$(lsong)⮕$e"
+	buf="${buf} %{r}$c⮕$e"
 	buf="${buf} $(song)"
 	buf="${buf} $c%{A:mpc toggle:} $(playstate) %{A}%{A:mpc prev:}⮳%{A} %{A:mpc next:}⮲ %{A}$e"
 	buf="${buf} $c%{A:vol -:} ⮟ %{A}$e%{A:vol !:} $(volume) %{A}$c%{A:vol +:} ⮞ %{A}$e"
 	echo " $buf"
-done | bar
+done | bar | sh
 
 #buf="${buf} %{F#a54242}%{A:vol -:} - %{A}%{F-} $(volume) %{F#21a11d}%{A:vol +:} + %{A}%{F-}"
 #buf="${buf}  %{+u}%{B#a54242}%{A:ciao:} ⯉ %{A}%{B-}%{-u}"
