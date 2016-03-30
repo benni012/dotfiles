@@ -22,6 +22,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'junegunn/goyo.vim'
 Plug 'benekastah/neomake'
 Plug 'mbbill/undotree'
+Plug 'nhooyr/neoman.vim'
 Plug 'tpope/vim-vinegar'
 "Plug 'mhinz/vim-startify'
 call plug#end()
