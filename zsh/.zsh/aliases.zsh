@@ -26,6 +26,7 @@ alias syyu="pacaur -Sryyu"
 alias tclock="watch -tcn1 -x mksh -c 'date +%T | toilet -f future --gay'"
 alias tree='tree -CAFa -I "CVS|*.*.package|.svn|.git|.hg|node_modules|bower_components" --dirsfirst'
 alias up="uguush -o mixtape -u "
+alias upl="up $(find /data/img/scrots | tail -1)"
 alias update="pacaur -Syu"
 alias v="vim"
 alias vim="nvim"
@@ -36,13 +37,13 @@ function learn {
 }
 
 function lsfilme {
-	ls -1 /data/Filme
+	ls -1 /data/mov
 }
 
 function filme {
 	cd /
 	rm -f /tmp/filme
-	find /data/Filme -type f \( -iname "*.mkv" -o -iname "*.mp4" -o -iname "*.avi" \) -print0 \
+	find /data/mov -type f \( -iname "*.mkv" -o -iname "*.mp4" -o -iname "*.avi" \) -print0 \
 	| xargs -0 -i% bash -c '{ echo $(basename "%")\ $(vidlen "%") >>/tmp/filme; }'
 	sort /tmp/filme | column -t | altcolor
 	cd - > /dev/null
