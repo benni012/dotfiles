@@ -30,6 +30,7 @@ hc keybind $Mod-F4 spawn urxvt -fn "-nil-profont-medium-r-normal--12-120-72-72-c
 hc keybind $Mod-d spawn run_dmenu
 hc keybind Print spawn screenie
 hc keybind Shift-Print spawn screenie -s 
+hc keybind $Mod-w spawn weefi
 hc keybind $Mod-Shift-p spawn python ~/scripts/py3lock.py
 hc keybind $Mod-Shift-y spawn tlastsong
 
