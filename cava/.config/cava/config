@@ -3,7 +3,7 @@
 [general]
 mode = normal # smoothing mode, can be normal, scientific or waves.
 framerate = 60 # Default: 60. Accepts only non-negative values.
-sensitivity = 2 #  is sensitivity %. Accepts only non-negative values.
+sensitivity = 7 #  is sensitivity %. Accepts only non-negative values.
 bars = 0 # the number of bars. 0 sets it to auto (fil upp console). 
 bar_width = 3 # width of bars. 
 bar_spacing = 1 # space between bars.

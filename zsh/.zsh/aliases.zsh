@@ -31,9 +31,12 @@ alias v="vim"
 alias vim="nvim"
 alias win="sm && cw"
 
-function upl {
+function lastscr {
 	i=${1:-1}
-	find /data/img/scrots | tail -$i | xargs -I % uguush -o mixtape -u %
+	find /data/img/scrots | tail -$i
+}
+function upl {
+	lastscr $@ | xargs -I % uguush -o mixtape -u %
 }
 
 function learn {
