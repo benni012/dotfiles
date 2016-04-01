@@ -26,11 +26,15 @@ alias syyu="pacaur -Sryyu"
 alias tclock="watch -tcn1 -x mksh -c 'date +%T | toilet -f future --gay'"
 alias tree='tree -CAFa -I "CVS|*.*.package|.svn|.git|.hg|node_modules|bower_components" --dirsfirst'
 alias up="uguush -o mixtape -u "
-alias upl="up $(find /data/img/scrots | tail -1)"
 alias update="pacaur -Syu"
 alias v="vim"
 alias vim="nvim"
 alias win="sm && cw"
+
+function upl {
+	i=${1:-1}
+	find /data/img/scrots | tail -$i | xargs -I % uguush -o mixtape -u %
+}
 
 function learn {
 	mpv /data/Videos/Statistics/$1.* &>/dev/null &!
