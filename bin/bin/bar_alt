@@ -73,7 +73,7 @@ playperc() {
 
 while :; do
 	buf=""
-	buf="${buf} %{A:tea:}$c⮖$e%{A} $(clock)"
+	buf="${buf} $c⮖$e $(clock)"
 	buf="${buf} %{c}$(desktop)"
 	buf="${buf} %{r}$c⮕$e"
 	buf="${buf} $(song)"
