@@ -117,8 +117,11 @@ nnoremap <silent> <leader>ev :vsp ~/.vimrc<CR>
 " toggle relative line numbers
 nnoremap <silent> <leader>rl :set relativenumber!<CR>
 
-" toggle gundo
+" toggle undotree
 nnoremap <silent> <leader>u :UndotreeToggle<CR>
+
+" super-save
+nnoremap <leader>w :update<CR>
 
 " open tab
 nnoremap t :tabnext<CR>
@@ -131,6 +134,9 @@ nnoremap <Down> :resize +2<CR>
 
 " keep the cursor in place when joining lines
 nnoremap J mzJ`z
+
+" damn you, vim!
+nnoremap Y y$
 " }}}
 " commands {{{
 

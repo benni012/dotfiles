@@ -6,6 +6,7 @@ alias bs="base"
 alias dvtm="dvtm -m ^a"
 alias eject="eject -T"
 alias fetch="neofetch"
+alias f="figlet -f "
 alias gitr="find -maxdepth 1 -type d | xargs -I % mksh -c '{ if [ -d \"%/.git\" ]; then echo \"% => \"; cd \"%\"; git pull; echo; cd ->/dev/null; fi }'"
 alias l="ls --color=auto --group-directories-first -1"
 alias la="ls -lah --color=auto --group-directories-first"
@@ -40,7 +41,7 @@ function upl {
 }
 
 function learn {
-	mpv /data/Videos/Statistics/$1.* &>/dev/null &!
+	mpv /data/vid/Statistics/$1.* &>/dev/null &!
 }
 
 function lsfilme {
