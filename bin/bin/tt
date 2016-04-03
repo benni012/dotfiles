@@ -5,8 +5,9 @@ if [ -z $1 ]; then
 fi
 
 t=$1
+m=${2:-teatime!}
 
-(sleep $(( t * 60 )) && notify-send 'teatime!') &
+(sleep $(( t * 60 )) && notify-send "$m") &
 
 #buf="  %{A:exit:}x%{A}"
 #for f in 3 4 7 8 10; do buf="$buf %{A:(sleep $(( f * 60 )) && notify-send 'teatime!') & exit:}$f%{A}"; done
