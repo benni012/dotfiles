@@ -5,14 +5,14 @@ alias bc="bc -ql"
 alias bs="base"
 alias dvtm="dvtm -m ^a"
 alias eject="eject -T"
+alias f="toilet -f "
 alias fetch="neofetch"
-alias f="figlet -f "
 alias gitr="find -maxdepth 1 -type d | xargs -I % mksh -c '{ if [ -d \"%/.git\" ]; then echo \"% => \"; cd \"%\"; git pull; echo; cd ->/dev/null; fi }'"
 alias l="ls --color=auto --group-directories-first -1"
 alias la="ls -lah --color=auto --group-directories-first"
 alias ll="ls -lh --color=auto --group-directories-first"
-alias ls="ls --color=auto --group-directories-first"
 alias lrn='learn'
+alias ls="ls --color=auto --group-directories-first"
 alias matrix="cmatrix -b"
 alias mixer="alsamixer"
 alias pacman="sudo pacman"
@@ -30,14 +30,16 @@ alias up="uguush -o mixtape -u "
 alias update="pacaur -Syu"
 alias v="vim"
 alias vim="nvim"
+alias wee="weechat"
 alias win="sm && cw"
 
-function lastscr {
+function lsc {
 	i=${1:-1}
-	find /data/img/scrots | tail -$i
+	find $SCROT_DIR | tail -$i
 }
+
 function upl {
-	lastscr $@ | xargs -I % uguush -o mixtape -u %
+	lsc $@ | xargs -I % uguush -o mixtape -u %
 }
 
 function learn {
@@ -64,5 +66,5 @@ function bd {
 }
 
 function d {
-		dtach -A /tmp/dtach_${1:-0} ${2:-$SHELL}
+	dtach -A /tmp/dtach_${1:-0} ${2:-$SHELL}
 }
