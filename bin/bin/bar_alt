@@ -69,16 +69,14 @@ playperc() {
 	s=' ▁▂▃▄▅▆▇█'
 
 	if [ -z $pos ]; then
-		pos=0
-		len=1
+		printf "${s:0:1}"
+	else
+		perc=$(( 1 + pos * (${#s} - 1)  / (len + 1) ))
+
+		#perc=$(( pos * ${#s} / (len + 1) ))
+
+		printf "${s:$perc:1}"
 	fi
-	
-	perc=$(( 1 + pos * (${#s} - 1)  / (len + 1) ))
-
-	#perc=$(( pos * ${#s} / (len + 1) ))
-
-	#echo $perc
-	printf "${s:$perc:1}"
 }
 
 while :; do

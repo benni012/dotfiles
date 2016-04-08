@@ -123,9 +123,6 @@ nnoremap <silent> <leader>u :UndotreeToggle<CR>
 " super-save
 nnoremap <leader>w :update<CR>
 
-" open tab
-nnoremap t :tabnext<CR>
-
 " arrow keys resize views
 nnoremap <Left> :vertical resize +2<CR>
 nnoremap <Right> :vertical resize -2<CR>
