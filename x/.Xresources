@@ -9,6 +9,7 @@
 
 !#include ".xres.d/nvo"
 #include ".xres.d/smear"
+!#include ".xres.d/mattd"
 !#include ".xres.d/ayy"
 !#include ".xres.d/fyry"
 !#include ".xres.d/raiin"
@@ -33,7 +34,7 @@ urxvt*font:			xft:PragmataPro:size=16
 
 !xft.antialias: 1
 xft.autohint: 0
-!xft.hinting: 1
+xft.hinting: 0
 !xft.hintstyle: hintfull
 !xft.rgba: rgb
 !xft.lcdfilter:  lcddefault

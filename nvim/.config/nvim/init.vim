@@ -24,6 +24,8 @@ Plug 'benekastah/neomake'
 Plug 'mbbill/undotree'
 Plug 'nhooyr/neoman.vim'
 Plug 'tpope/vim-vinegar'
+Plug 'kiteco/plugins', { 'rtp': 'vim-kite/plugin/kite.vim' }
+"Plug 'wellle/targets.vim'
 "Plug 'mhinz/vim-startify'
 call plug#end()
 " }}}
@@ -113,6 +115,9 @@ nnoremap <space> za
 " source/edit vimrc
 nnoremap <silent> <leader>sv :source ~/.vimrc<CR>
 nnoremap <silent> <leader>ev :vsp ~/.vimrc<CR>
+
+" toggle line number
+nnoremap <silent> <leader>n :set number!<CR>
 
 " toggle relative line numbers
 nnoremap <silent> <leader>rl :set relativenumber!<CR>

@@ -66,16 +66,20 @@ playperc() {
 
 	pos=$(echo "$status" | mawk '{ print $1 }')
 	len=$(echo "$status" | mawk '{ print $2 }')
+
+	clen=1
 	s=' ▁▂▃▄▅▆▇█'
+	#s='    █   ██  ███ ████'
+
 
 	if [ -z $pos ]; then
-		printf "${s:0:1}"
+		printf "${s:0:$clen}"
 	else
-		perc=$(( 1 + pos * (${#s} - 1)  / (len + 1) ))
+		perc=$(( 1 + pos * (${#s} / clen - 1)  / (len + 1) ))
 
 		#perc=$(( pos * ${#s} / (len + 1) ))
 
-		printf "${s:$perc:1}"
+		printf "${s:$(( perc * clen )):$clen}"
 	fi
 }
 

@@ -31,14 +31,15 @@ redshift -l 50.2:8.7 -t 6500:2700 &
 #hsetroot -full ~/walls/winter.jpg &
 #wallshuf &
 #cwl
-hsetroot -solid "#002b36" -tile ~/patterns/pattern.png
+hsetroot -solid "#002b36" -tile ~/patterns/dots.png
 
 # fontpath
 xset +fp /home/ben/.local/share/fonts
 xset fp rehash
 
 # start compositor
-compton -cCr11 --backend glx --vsync opengl-swc &
+#compton -cCr11 --backend glx --vsync opengl-swc &
+compton -cCr11 &
 
 # notification daemon
 dunst &
