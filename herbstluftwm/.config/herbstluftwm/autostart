@@ -32,12 +32,12 @@ hc keybind Print spawn screenie
 hc keybind Shift-Print spawn screenie -s 
 hc keybind $Mod-w spawn weefi
 hc keybind $Mod-Shift-p spawn python ~/scripts/py3lock.py
-hc keybind $Mod-Shift-y spawn tlastsong
 
 # playback control
 hc keybind $Mod-F6 spawn mpc prev
 hc keybind $Mod-F7 spawn mpc toggle
 hc keybind $Mod-F8 spawn mpc next
+hc keybind $Mod-BackSpace spawn mpc seek 0%
 
 # vol control
 hc keybind $Mod-F10 spawn vol !
