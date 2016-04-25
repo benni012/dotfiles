@@ -33,6 +33,21 @@ alias vim="nvim"
 alias wee="weechat"
 alias win="sm && cw"
 
+function rf {
+	find $@ -type f | shuf -n1
+}
+
+function pre {
+	dir=$SERIES_DIR
+	case $1 in
+		ad) dir="$dir/American_Dad";;
+		fg) dir="$dir/Family_Guy";;
+		cb) dir="$dir/Cowboy_Bebop";;
+	esac
+
+	mpv "$(rf $dir)"
+}
+
 function lsc {
 	i=${1:-1}
 	find $SCROT_DIR | tail -$i
@@ -51,12 +66,11 @@ function lsfilme {
 }
 
 function filme {
-	cd /
-	rm -f /tmp/filme
 	find /data/mov -type f \( -iname "*.mkv" -o -iname "*.mp4" -o -iname "*.avi" \) -print0 \
-	| xargs -0 -i% bash -c '{ echo $(basename "%")\ $(vidlen "%") >>/tmp/filme; }'
-	sort /tmp/filme | column -t | altcolor
-	cd - > /dev/null
+	| xargs -0 -i% sh -c '{ echo $(basename "%" | cut -c -30;)" "$(vidlen "%"); }' \
+	| sort \
+	| column -t \
+	| altcolor
 }
 
 function bd {

@@ -9,6 +9,7 @@ if [ -n "$3" ]; then
 else
 	while IFS='' read -r LINE || [[ -n "$LINE" ]]; do
 		bc <<< "obase=$2; ibase=$1; $(tr '[a-f]' '[A-F]' <<< $LINE)" | tr -d '\\\n'
+		echo
 	done
 fi
 # | sed 's/(.)/ | xargs -I % mksh -c '{ cut -c $(( % + 1 )) <<< "0123456789abcdefghijklmnopqrstuvwxyz"; }'
