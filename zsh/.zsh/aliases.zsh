@@ -73,7 +73,7 @@ function filme {
 	| altcolor
 }
 
-function bd {
+function bdi {
 	sudo mount /dev/sr0 /mnt/cd;
 	play_bd "$@";
 	sudo umount /mnt/cd;

@@ -10,6 +10,14 @@ clock() {
 	date "+%d.%m.%Y %H:%M:%S"
 }
 
+tea() {
+	if [ $(pgrep -x tt | wc -l) -ge 1 ]; then
+		echo "%{F#af4444}"
+	else
+		echo "$c"
+	fi
+}
+
 volume() {
 	level=$(vol level)
 	state=$(vol state)
@@ -85,7 +93,7 @@ playperc() {
 
 while :; do
 	buf=""
-	buf="${buf} $c⮖$e $(clock)"
+	buf="${buf} $(tea)⮖$e $(clock)"
 	buf="${buf} %{c}$(desktop)"
 	buf="${buf} %{r}$c⮕$e"
 	buf="${buf} $(song)"

@@ -1,6 +1,6 @@
 [general]
-sensitivity = 5
-autosens = 1
+sensitivity = 2
+autosens = 0
 lock_input = 1
 
 ; mode = normal
