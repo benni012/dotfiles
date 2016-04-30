@@ -21,7 +21,8 @@ alias rm="rm -I"
 alias rnb="toilet --gay -f"
 alias rock="ncmpcpp"
 alias sau="pacaur -Sayu"
-alias startx="startx /etc/X11/xinit/xinitrc"
+alias sl="while :; do maim $(date +%Y%m%d%H%M%S).png; sleep 1; done"
+alias startx="startx ~/.xinitrc"
 alias syu="pacaur -Sryu"
 alias syyu="pacaur -Sryyu"
 alias tclock="watch -tcn1 -x mksh -c 'date +%T | toilet -f future --gay'"
@@ -67,7 +68,7 @@ function lsfilme {
 
 function filme {
 	find /data/mov -type f \( -iname "*.mkv" -o -iname "*.mp4" -o -iname "*.avi" \) -print0 \
-	| xargs -0 -i% sh -c '{ echo $(basename "%" | cut -c -30;)" "$(vidlen "%"); }' \
+	| xargs -0 -i% sh -c '{ echo $(basename "%" | cut -c -60;)" "$(vidlen "%"); }' \
 	| sort \
 	| column -t \
 	| altcolor
