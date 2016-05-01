@@ -6,13 +6,13 @@ mostly stolen
 my current setup
 ----------------
 
-* zsh as shell
-* herbstluftwm as wm
-* nvim as editor
-* ncmpcpp/mpd as music player
-* weechat as irc client (i use it for steam though)
-* dunst as notification daemon
-* sxhkd as hotkey daemon
+* __zsh__ as shell
+* __herbstluftwm__ as wm
+* __vim__ as editor
+* __ncmpcpp/mpd__ as music player/server
+* __weechat__as irc client (i use it for steam though)
+* __dunst__ as notification daemon
+* __sxhkd__ as hotkey daemon
 
 my todo
 -------
