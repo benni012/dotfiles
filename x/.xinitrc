@@ -38,8 +38,7 @@ xset +fp /home/ben/.local/share/fonts
 xset fp rehash
 
 # start compositor
-#compton -cCr11 --backend glx --vsync opengl-swc &
-compton -cCr11 &
+#compton -cCr11 &
 
 # notification daemon
 dunst &
@@ -54,4 +53,5 @@ case $session in
 	ob				) exec openbox-session;;
 	herb			) sxhkd & exec herbstluftwm;;
 	bspwm			) exec bspwm;;
+	cwm				) exec cwm;;
 esac
