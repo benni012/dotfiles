@@ -10,7 +10,7 @@ my current setup
 * __herbstluftwm__ as wm
 * __vim__ as editor
 * __ncmpcpp/mpd__ as music player/server
-* __weechat__as irc client (i use it for steam though)
+* __weechat__ as irc client (i use it for steam though)
 * __dunst__ as notification daemon
 * __sxhkd__ as hotkey daemon
 
