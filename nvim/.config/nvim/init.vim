@@ -12,28 +12,37 @@ colorscheme term
 " plugins {{{
 
 call plug#begin()
-Plug 'tpope/vim-abolish'
-Plug 'tpope/vim-sensible'
-Plug 'jamessan/vim-gnupg'
-Plug 'tpope/vim-speeddating'
-Plug 'ap/vim-css-color'
-Plug 'nanotech/jellybeans.vim'
-Plug 'tpope/vim-fugitive'
-Plug 'junegunn/goyo.vim'
-Plug 'benekastah/neomake'
-Plug 'mbbill/undotree'
-Plug 'nhooyr/neoman.vim'
-Plug 'tpope/vim-vinegar'
-Plug 'kiteco/plugins', { 'rtp': 'vim-kite/plugin/kite.vim' }
-"Plug 'wellle/targets.vim'
+"Plug 'justinmk/vim-dirvish'
+"Plug 'kiteco/plugins', { 'rtp': 'vim-kite/plugin/kite.vim' }
 "Plug 'mhinz/vim-startify'
+Plug 'ap/vim-css-color'
+Plug 'benekastah/neomake'
+Plug 'jamessan/vim-gnupg'
+Plug 'junegunn/goyo.vim'
+Plug 'justinmk/vim-sneak'
+Plug 'mbbill/undotree'
+Plug 'nanotech/jellybeans.vim'
+Plug 'nhooyr/neoman.vim'
+Plug 'rking/ag.vim'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-characterize'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-obsession'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-vinegar'
+Plug 'wellle/targets.vim'
 call plug#end()
 " }}}
 " options {{{
 
+" enable mouse
+set mouse=a
+
 " show whitespaces
 "set listchars=eol:¬,tab:>-,trail:!,extends:>,precedes:<
-set listchars=tab:›\ 
+set listchars=tab:›\ ,eol:¬
 
 " abbreviate stuff 
 set shortmess=atI
