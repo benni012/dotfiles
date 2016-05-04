@@ -1,0 +1,4 @@
+#!/bin/sh
+. ~/bin/dmenu_args
+
+/bin/dmenu $dmenu_args $@
