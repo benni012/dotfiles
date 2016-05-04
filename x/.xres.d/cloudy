@@ -11,7 +11,7 @@ URxvt.cursorColor: #eff1f5
 
 ! black
 !*.color0:       #273941
-*.color0:       #3e4853
+*.color0:       #456472
 *.color8:       #456472
 
 ! red

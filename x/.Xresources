@@ -6,14 +6,14 @@
 !#include ".xres.d/gruvbox"
 !#include ".xres.d/hybrid"
 !#include ".xres.d/hybrid-loco"
-
-!#include ".xres.d/nvo"
-#include ".xres.d/smear"
-!#include ".xres.d/mattd"
-!#include ".xres.d/ayy"
 !#include ".xres.d/fyry"
-!#include ".xres.d/raiin"
+!#include ".xres.d/ayy"
+
+#include ".xres.d/smear"
 !#include ".xres.d/cloudy"
+!#include ".xres.d/nvo"
+!#include ".xres.d/raiin"
+!#include ".xres.d/mattd"
 
 urxvt*scrollBar: false
 urxvt*highlightColor: #2f2f2f
