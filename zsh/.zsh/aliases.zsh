@@ -30,7 +30,7 @@ alias tree='tree -CAFa -I "CVS|*.*.package|.svn|.git|.hg|node_modules|bower_comp
 alias up="uguush -o mixtape -u "
 alias update="pacaur -Syu"
 alias v="vim"
-#alias vim="nvim"
+alias vim="nvim"
 alias wee="weechat"
 alias win="sm && cw"
 
