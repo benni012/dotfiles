@@ -1,9 +1,6 @@
 #!/bin/sh
 
 c="%{F$(xrq *color5)}"
-#c="%{F#81a2be}"
-#c="%{F#70a070}"
-
 e="%{F-}"
 
 clock() {
@@ -12,7 +9,7 @@ clock() {
 
 tea() {
 	if [ $(pgrep -x tt | wc -l) -ge 1 ]; then
-		echo "%{F#af4444}"
+		echo "%{F$(xrq *color1)}"
 	else
 		echo "$c"
 	fi
