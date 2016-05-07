@@ -15,11 +15,11 @@ call plug#begin()
 "Plug 'justinmk/vim-dirvish'
 "Plug 'kiteco/plugins', { 'rtp': 'vim-kite/plugin/kite.vim' }
 "Plug 'mhinz/vim-startify'
+"Plug 'justinmk/vim-sneak'
 Plug 'ap/vim-css-color'
 Plug 'benekastah/neomake'
 Plug 'jamessan/vim-gnupg'
 Plug 'junegunn/goyo.vim'
-Plug 'justinmk/vim-sneak'
 Plug 'mbbill/undotree'
 Plug 'nanotech/jellybeans.vim'
 Plug 'nhooyr/neoman.vim'
@@ -93,6 +93,12 @@ set formatoptions+=j
 
 " remove docx from gzip
 let g:zipPlugin_ext='*.zip,*.jar,*.xpi,*.ja,*.war,*.ear,*.celzip,*.oxt,*.kmz,*.wsz,*.xap,*.docm,*.dotx,*.dotm,*.potx,*.potm,*.ppsx,*.ppsm,*.pptx,*.pptm,*.ppam,*.sldx,*.thmx,*.xlam,*.xlsx,*.xlsm,*.xlsb,*.xltx,*.xltm,*.xlam,*.crtx,*.vdw,*.glox,*.gcsx,*.gqsx'
+
+" wrap
+set wrap
+set breakindent
+set breakindentopt=sbr
+set showbreak=↪\ 
 " }}}
 " keybinds {{{
 
@@ -161,7 +167,7 @@ func! WordProcessorMode()
 	setlocal formatoptions=1 
 	setlocal noexpandtab 
 	"setlocal spell spelllang=en_us 
-	"set thesaurus+=~/.config/nvim/thesaurus/mthesaur.txt
+	set thesaurus+=~/.config/nvim/thesaurus/mthesaur.txt
 	set complete+=s
 	set formatprg=par
 	setlocal wrap 

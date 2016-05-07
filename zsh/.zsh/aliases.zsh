@@ -21,18 +21,15 @@ alias rm="rm -I"
 alias rnb="toilet --gay -f"
 alias rock="ncmpcpp"
 alias sau="pacaur -Sayu"
-alias sl="while :; do maim $(date +%Y%m%d%H%M%S).png; sleep 1; done"
 alias startx="startx ~/.xinitrc"
 alias syu="pacaur -Sryu"
 alias syyu="pacaur -Sryyu"
-alias tclock="watch -tcn1 -x mksh -c 'date +%T | toilet -f future --gay'"
 alias tree='tree -CAFa -I "CVS|*.*.package|.svn|.git|.hg|node_modules|bower_components" --dirsfirst'
 alias up="uguush -o mixtape -u "
 alias update="pacaur -Syu"
 alias v="vim"
 alias vim="nvim"
 alias wee="weechat"
-alias win="sm && cw"
 
 function rf {
 	find $@ -type f | shuf -n1
@@ -66,12 +63,15 @@ function lsfilme {
 	ls -1 /data/mov
 }
 
-function filme {
+function lfilme {
 	find /data/mov -type f \( -iname "*.mkv" -o -iname "*.mp4" -o -iname "*.avi" \) -print0 \
 	| xargs -0 -i% sh -c '{ echo $(basename "%" | cut -c -60;)" "$(vidlen "%"); }' \
 	| sort \
-	| column -t \
-	| altcolor
+	| column -t
+}
+
+function filme {
+	filme | altcolor
 }
 
 function bdi {
