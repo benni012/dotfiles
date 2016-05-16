@@ -17,11 +17,11 @@ my current setup
 my todo
 -------
 
-- [ ] try wmutils
 - [ ] try crux
-- [ ] try mksh
-- [ ] try st
-- [ ] make my own colorscheme instead of stealing it from somewhere
+- [x] try wmutils (not for me, no real tiling)
+- [x] try mksh (no brace expansion :( )
+- [x] try st (i see no reason for switching, also it messes up my fonts smh)
+- [x] make my own colorscheme instead of stealing it from somewhere
 
 screenies
 ---------
