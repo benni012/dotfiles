@@ -13,19 +13,21 @@ colorscheme term
 
 call plug#begin()
 "Plug 'justinmk/vim-dirvish'
+"Plug 'justinmk/vim-sneak'
 "Plug 'kiteco/plugins', { 'rtp': 'vim-kite/plugin/kite.vim' }
 "Plug 'mhinz/vim-startify'
-"Plug 'justinmk/vim-sneak'
+"Plug 'mphe/grayout.vim'
+"Plug 'nanotech/jellybeans.vim'
 Plug 'ap/vim-css-color'
 Plug 'benekastah/neomake'
 Plug 'jamessan/vim-gnupg'
 Plug 'junegunn/goyo.vim'
 Plug 'mbbill/undotree'
-Plug 'nanotech/jellybeans.vim'
 Plug 'nhooyr/neoman.vim'
 Plug 'rking/ag.vim'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-characterize'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-obsession'
@@ -152,8 +154,11 @@ nnoremap <Down> :resize +2<CR>
 " keep the cursor in place when joining lines
 nnoremap J mzJ`z
 
+" reverse join
+nnoremap K i<CR><Esc>d^==kg_lD
+
 " damn you, vim!
-nnoremap Y y$
+nnoremap Y y$ "
 " }}}
 " commands {{{
 

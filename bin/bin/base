@@ -1,15 +1,19 @@
-#!/bin/zsh
+#!/bin/sh
+
+bconv() {
+	bc <<< "obase=$2; ibase=$1; $(echo $3 | tr '[a-f]' '[A-F]')" | tr -d '\\\n'
+}
 
 if [ $# -lt 2 ]; then
 	exit
 fi
 
 if [ -n "$3" ]; then
-	bc <<< "obase=$2; ibase=$1; $(tr '[a-f]' '[A-F]' <<< $3)" | tr -d '\\\n'
+	bconv $@
 else
 	while IFS='' read -r LINE || [[ -n "$LINE" ]]; do
-		bc <<< "obase=$2; ibase=$1; $(tr '[a-f]' '[A-F]' <<< $LINE)" | tr -d '\\\n'
+		bconv $@ $LINE
 		echo
 	done
 fi
-# | sed 's/(.)/ | xargs -I % mksh -c '{ cut -c $(( % + 1 )) <<< "0123456789abcdefghijklmnopqrstuvwxyz"; }'
+# | sed 's/\(.\)/\1 /g | xargs -I % mksh -c '{ cut -c $(( % + 1 )) <<< "0123456789abcdefghijklmnopqrstuvwxyz"; }'
