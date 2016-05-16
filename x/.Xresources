@@ -1,7 +1,6 @@
 !#include ".xres.d/solarized"
 !#include ".xres.d/sourcerer"
 !#include ".xres.d/eighties"
-!#include ".xres.d/base16"
 !#include ".xres.d/gotham"
 !#include ".xres.d/gruvbox"
 !#include ".xres.d/hybrid"
@@ -9,11 +8,14 @@
 !#include ".xres.d/fyry"
 !#include ".xres.d/ayy"
 
-#include ".xres.d/smear"
+!#include ".xres.d/smear"
+#include "genmaicha"
+!#include ".xres.d/found"
 !#include ".xres.d/cloudy"
 !#include ".xres.d/nvo"
 !#include ".xres.d/raiin"
 !#include ".xres.d/mattd"
+!#include ".xres.d/base16"
 
 URxvt*scrollBar: false
 URxvt*highlightColor: #2f2f2f
