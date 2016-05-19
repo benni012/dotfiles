@@ -31,7 +31,8 @@ redshift -l 50.2:8.7 -t 6500:2700 &
 #hsetroot -full ~/walls/winter.jpg &
 #wallshuf &
 #cwl
-hsetroot -solid "#002b36" -tile ~/patterns/dots.png
+hsetroot -solid '#a38f3d' -tile ~/patterns/3D.png
+#hsetroot -solid "#002b36" -tile ~/patterns/dots.png
 
 # fontpath
 xset +fp /home/ben/.local/share/fonts

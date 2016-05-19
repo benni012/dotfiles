@@ -1,11 +1,17 @@
 def_key "k"
-  scroll_up
+	scroll_up
 
 def_key "j"
-  scroll_down
+	scroll_down
+
+def_key "h"
+	master_screen
 
 def_key "h"
 	previous_column
+
+def_key "l"
+	slave_screen 
 
 def_key "l"
 	next_column
@@ -22,8 +28,9 @@ def_key "d"
 def_key "-"
 	jump_to_parent_directory
 
+def_key ";"
+	show_lyrics
+
 def_command "q" [deferred]
 	quit
 
-def_key ";"
-	show_lyrics
