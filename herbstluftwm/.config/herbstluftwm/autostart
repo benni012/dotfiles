@@ -24,9 +24,8 @@ hc keybind $Mod-Return spawn urxvt
 hc keybind $Mod-F1 spawn urxvt -fn "*-lemon-*" -fb "*-lemon-*"
 hc keybind $Mod-F2 spawn urxvt -fn "*-marathonmod-*" -fb "*-marathonmod-*"
 hc keybind $Mod-F3 spawn urxvt -fn "*-metis-*" -fb "*-metis-*"
-hc keybind $Mod-F5 spawn urxvt -fn "*-drift-*" -fb "*-drift-*"
 hc keybind $Mod-F4 spawn urxvt -fn "-nil-profont-medium-r-normal--12-120-72-72-c-60-iso8859-1" -fb "-nil-profont-medium-r-normal--12-120-72-72-c-60-iso8859-1"
-#hc keybind $Mod-F4 spawn urxvt -fn "xft:PragmataPro:size=20"
+hc keybind $Mod-F5 spawn urxvt -fn "-*-neep-*-*-*-*-11-*-*-*-*-*-*-*" -fb "-*-neep-*-*-*-*-11-*-*-*-*-*-*-*"
 
 hc keybind $Mod-d spawn run_dmenu
 hc keybind Print spawn screenie
@@ -39,6 +38,7 @@ hc keybind $Mod-F6 spawn mpc prev
 hc keybind $Mod-F7 spawn mpc toggle
 hc keybind $Mod-F8 spawn mpc next
 hc keybind $Mod-BackSpace spawn mpc seek 0%
+hc keybind $Mod-y spawn mpc single
 
 # vol control
 hc keybind $Mod-F10 spawn vol !

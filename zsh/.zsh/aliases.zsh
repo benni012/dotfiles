@@ -72,7 +72,7 @@ function lfilme {
 }
 
 function filme {
-	filme | altcolor
+	lfilme | altcolor
 }
 
 function bdi {

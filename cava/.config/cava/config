@@ -25,8 +25,9 @@ foreground = blue
 ; background = black
 
 [smoothing]
+monstercat = 0
+
 ; integral = 0.7
-; monstercat = 1
 ; gravity = 1
 ; ignore = 0
 
