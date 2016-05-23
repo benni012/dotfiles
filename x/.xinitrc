@@ -31,8 +31,9 @@ redshift -l 50.2:8.7 -t 6500:2700 &
 #hsetroot -full ~/walls/winter.jpg &
 #wallshuf &
 #cwl
-hsetroot -solid '#a38f3d' -tile ~/patterns/3D.png
+#hsetroot -solid '#a38f3d' -tile ~/patterns/3D.png
 #hsetroot -solid "#002b36" -tile ~/patterns/dots.png
+hsetroot -solid '#5d6f40' -tile patterns/metal_dark.png 
 
 # fontpath
 xset +fp /home/ben/.local/share/fonts
@@ -53,6 +54,7 @@ case $session in
 	i3				) exec i3;;
 	ob				) exec openbox-session;;
 	herb			) sxhkd & exec herbstluftwm;;
-	bspwm			) exec bspwm;;
-	cwm				) exec cwm;;
+	# bspwm			) exec bspwm;;
+	# cwm				) exec cwm;;
+	# dwm				) exec dwm;;
 esac
