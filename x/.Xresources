@@ -9,7 +9,7 @@
 !#include ".xres.d/ayy"
 
 !#include ".xres.d/smear"
-#include "genmaicha"
+#include ".xres.d/genmaicha"
 !#include ".xres.d/found"
 !#include ".xres.d/cloudy"
 !#include ".xres.d/nvo"
