@@ -159,6 +159,9 @@ nnoremap K i<CR><Esc>d^==kg_lD
 
 " damn you, vim!
 nnoremap Y y$ "
+
+" make a numeration
+vnoremap <C-a> :call Incr()<CR>
 " }}}
 " commands {{{
 
@@ -168,18 +171,14 @@ com! Wipeout call s:wipeout()
 " }}}
 " functions {{{
 
-func! WordProcessorMode() 
-	setlocal formatoptions=1 
-	setlocal noexpandtab 
-	"setlocal spell spelllang=en_us 
-	set thesaurus+=~/.config/nvim/thesaurus/mthesaur.txt
-	set complete+=s
-	set formatprg=par
-	setlocal wrap 
-	setlocal linebreak 
+" word processor mode
+function! WordProcessorMode()
+	setlocal linebreak
+	setlocal wrap
 	Goyo
-endfu 
+endfunction
 
+" wipe all buffers
 function! s:wipeout()
 	let tpbl=[]
 	call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
@@ -189,6 +188,16 @@ function! s:wipeout()
 		let wiped += 1
 	endfor
 	echom wiped . ' buffers wiped'
+endfunction
+
+" create numeration
+function! Incr()
+	let a = line('.') - line("'<")
+	let c = virtcol("'<")
+	if a > 0
+		execute 'normal! '.c.'|'.a."\<C-a>"
+	endif
+	normal `<
 endfunction
 
 " }}}
