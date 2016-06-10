@@ -97,6 +97,7 @@ while :; do
 	buf="${buf}$c%{A:mpc prev:} ⮳%{A}%{A:mpc toggle:} $e$(playstate)$(playperc) %{A}$c%{A:mpc next:}⮲ %{A}$e"
 	buf="${buf} $c%{A:vol -:} ⮟ %{A}$e%{A:vol !:} $(volume) %{A}$c%{A:vol +:} ⮞ %{A}$e"
 	echo " $buf"
+	sleep .01
 done | bar | sh >/dev/null
 
 #buf="${buf} $c%{A:mpc toggle:}$(playstate) %{A}%{A:mpc prev:}⮳%{A} $(playperc) %{A:mpc next:}⮲ %{A}$e"
