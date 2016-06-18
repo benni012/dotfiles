@@ -25,7 +25,7 @@ URxvt*skipBuiltinGlyps: true
 !URxvt*depth: 32
 !*background: rgba:2000/2400/2c00/c800
 
-URxvt*font:			xft:PragmataPro:size=17
+URxvt*font:			xft:PragmataPro:size=17,xft:Source Han Sans Regular
 !URxvt*font:			-*-tewi-medium-*-*-*-11-*-*-*-*-*-iso10646-*
 !URxvt*font:			xft:tamsyn
 !URxvt*font:			-*-gohufont-medium-*-*-*-14-*-*-*-*-*-iso10646-*
