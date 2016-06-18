@@ -12,25 +12,26 @@ colorscheme term
 " plugins {{{
 
 call plug#begin()
-"Plug 'justinmk/vim-dirvish'
-"Plug 'justinmk/vim-sneak'
-"Plug 'kiteco/plugins', { 'rtp': 'vim-kite/plugin/kite.vim' }
-"Plug 'mhinz/vim-startify'
-"Plug 'mphe/grayout.vim'
-"Plug 'nanotech/jellybeans.vim'
-Plug 'ap/vim-css-color'
-Plug 'benekastah/neomake'
+" Plug 'justinmk/vim-dirvish'
+" Plug 'justinmk/vim-sneak'
+" Plug 'kiteco/plugins', { 'rtp': 'vim-kite/plugin/kite.vim' }
+" Plug 'mhinz/vim-startify'
+" Plug 'mphe/grayout.vim'
+" Plug 'nanotech/jellybeans.vim'
+" Plug 'ap/vim-css-color'
+" Plug 'benekastah/neomake'
+" Plug 'mbbill/undotree'
+" Plug 'nhooyr/neoman.vim'
+" Plug 'rking/ag.vim'
+" Plug 'tpope/vim-abolish'
+" Plug 'tpope/vim-eunuch'
+" Plug 'tpope/vim-fugitive'
 Plug 'jamessan/vim-gnupg'
 Plug 'junegunn/goyo.vim'
-Plug 'mbbill/undotree'
-Plug 'nhooyr/neoman.vim'
-Plug 'rking/ag.vim'
-Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-characterize'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-obsession'
+Plug 'tpope/vim-surround'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-vinegar'
@@ -168,6 +169,7 @@ vnoremap <C-a> :call Incr()<CR>
 com! WP call WordProcessorMode()
 com! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
 com! Wipeout call s:wipeout()
+com! FormatC execute '%g/^\s*\n\s*$/d' | %normal = | nohlsearch | %!indent -kr
 " }}}
 " functions {{{
 
