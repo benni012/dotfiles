@@ -218,7 +218,7 @@ autocmd BufWritePre *.java,*.c,*.cpp,*.html,*.css,*.txt :%s/\s\+$//e
 " c set compiler
 autocmd BufRead,BufNewFile *.c set makeprg=cc\ %
 
-" pnc (Pro and Contra) filetype
+" pnc (pro and contra) filetype
 autocmd BufRead,BufNewFile *.pnc set filetype=pnc
 autocmd BufRead,BufNewFile *.pnc syntax match pos "^\s*+.*$" 
 autocmd BufRead,BufNewFile *.pnc syntax match neg "^\s*-.*$" 

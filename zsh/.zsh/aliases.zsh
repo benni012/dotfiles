@@ -27,6 +27,7 @@ alias startx="startx ~/.xinitrc"
 alias syu="pacaur -Sryu"
 alias syyu="pacaur -Sryyu"
 alias tree='tree -CAFa -I "CVS|*.*.package|.svn|.git|.hg|node_modules|bower_components" --dirsfirst'
+alias todo="todo.sh"
 alias up="uguush -o mixtape -u "
 alias update="pacaur -Syu"
 alias v="vim"
