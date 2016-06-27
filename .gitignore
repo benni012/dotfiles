@@ -3,8 +3,8 @@ nvim/.config/nvim/plugged
 nvim/.config/nvim/undo
 nvim/.config/nvim/.netrwhist
 
-weechat/.weechat/weechat.log
-weechat/.weechat/logs
+weechat/.weechat/*
+!weechat/.weechat/*.conf
 
 ncmpcpp/.ncmpcpp/error.log
 ncmpcpp/.ncmpcpp/patterns.list
