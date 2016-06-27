@@ -15,6 +15,7 @@ alias lrn='learn'
 alias ls="ls --color=auto --group-directories-first"
 alias matrix="cmatrix -b"
 alias mixer="alsamixer"
+alias paboost="pactl set-sink-volume 1"
 alias pacman="sudo pacman"
 alias play_bd="mpv -vo vdpau -vd-lavc-threads 8 br:////mnt/cd"
 alias plen="mpc playlist --format '%time%' | awk -F ':' '{ m+=\$1; s+=\$2; } END { res=(m*60+s); printf(\"%02d:%02d:%02d\", int(res/60/60), int(res/60)%60, res%60); }'"
