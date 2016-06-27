@@ -87,3 +87,7 @@ function bdi {
 function d {
 	dtach -A /tmp/dtach_${1:-0} ${2:-$SHELL}
 }
+
+function vpn {
+
+}
