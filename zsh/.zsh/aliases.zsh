@@ -23,7 +23,7 @@ alias rm="rm -I"
 alias rnb="toilet --gay -f"
 alias rock="ncmpcpp"
 alias sau="pacaur -Sayu"
-alias sdown="youtube-dl -x --add-metadata"
+alias sdown="youtube-dl -x --add-metadata --audio-format=mp3 -o '%(title)s.%(ext)s'"
 alias startx="startx ~/.xinitrc"
 alias syu="pacaur -Sryu"
 alias syyu="pacaur -Sryyu"
@@ -32,6 +32,7 @@ alias todo="todo.sh"
 alias up="uguush -o mixtape -u "
 alias update="pacaur -Syu"
 alias v="vim"
+alias vpn="cd ~/vpn && sudo openvpn"
 alias vim="nvim"
 alias wee="weechat"
 
@@ -86,8 +87,4 @@ function bdi {
 
 function d {
 	dtach -A /tmp/dtach_${1:-0} ${2:-$SHELL}
-}
-
-function vpn {
-
 }
