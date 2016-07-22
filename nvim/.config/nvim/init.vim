@@ -12,15 +12,14 @@ colorscheme term
 " plugins {{{
 
 call plug#begin()
+" Plug 'ap/vim-css-color'
+" Plug 'benekastah/neomake'
 " Plug 'justinmk/vim-dirvish'
 " Plug 'justinmk/vim-sneak'
 " Plug 'kiteco/plugins', { 'rtp': 'vim-kite/plugin/kite.vim' }
 " Plug 'mhinz/vim-startify'
 " Plug 'mphe/grayout.vim'
 " Plug 'nanotech/jellybeans.vim'
-" Plug 'ap/vim-css-color'
-" Plug 'benekastah/neomake'
-" Plug 'mbbill/undotree'
 " Plug 'nhooyr/neoman.vim'
 " Plug 'rking/ag.vim'
 " Plug 'tpope/vim-abolish'
@@ -28,12 +27,13 @@ call plug#begin()
 " Plug 'tpope/vim-fugitive'
 Plug 'jamessan/vim-gnupg'
 Plug 'junegunn/goyo.vim'
-Plug 'tpope/vim-obsession'
+Plug 'mbbill/undotree'
 Plug 'tpope/vim-characterize'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-surround'
+Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
 Plug 'wellle/targets.vim'
 call plug#end()
@@ -224,6 +224,9 @@ autocmd BufRead,BufNewFile *.pnc syntax match pos "^\s*+.*$"
 autocmd BufRead,BufNewFile *.pnc syntax match neg "^\s*-.*$" 
 autocmd BufRead,BufNewFile *.pnc highlight pos ctermfg=green
 autocmd BufRead,BufNewFile *.pnc highlight neg ctermfg=red
+
+" disable auto commenting
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " }}}
 " vim:foldmethod=marker:foldlevel=0

@@ -16,9 +16,9 @@ state() {
 test $# -eq 0 && echo "`level` `state`" && exit 0
 
 case $1 in
-    +)      amixer set Master 5%+ >/dev/null;;
-    -)      amixer set Master 5%- >/dev/null;;
-    !)      amixer set Master toggle >/dev/null;;
+    +)      pactl set-sink-volume 1 +5% >/dev/null;;
+    -)      pactl set-sink-volume 1 -5% >/dev/null;;
+    !)      pactl set-sink-mute 1 toggle >/dev/null;;
     state|level) $1;;
-    *)    amixer set Master $1 >/dev/null;;
+    *)    	pactl set-sink-volume 1 $1 >/dev/null;;
 esac
