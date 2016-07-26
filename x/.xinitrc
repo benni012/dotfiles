@@ -1,13 +1,10 @@
 #!/bin/sh
 if [ -d /etc/X11/xinit/xinitrc.d ] ; then
- for f in /etc/X11/xinit/xinitrc.d/?* ; do
-  [ -x "$f" ] && . "$f"
- done
- unset f
+	for f in /etc/X11/xinit/xinitrc.d/?* ; do
+		[ -x "$f" ] && . "$f"
+	done
+	unset f
 fi
-
-# environment variables
-export SCROT_DIR=/data/img/scrots
 
 # load the xres
 xrdb ~/.Xresources
@@ -20,19 +17,9 @@ xset m 0 0
 xrandr --dpi 92x92
 
 # start f.lux
-#xflux -l 50.2 -g 8.7 &
 redshift -l 50.2:8.7 -t 6500:2700 &
 
-# Set the volume
-#amixer -- set Master -19dB
-
 # the wallpaper daemon
-#/home/ben/scripts/wallpaperd &
-#hsetroot -full ~/walls/winter.jpg &
-#wallshuf &
-#cwl
-#hsetroot -solid '#a38f3d' -tile ~/patterns/3D.png
-#hsetroot -solid "#002b36" -tile ~/patterns/dots.png
 hsetroot -solid '#5d6f40' -tile patterns/metal_dark.png 
 
 # fontpath
@@ -54,7 +41,4 @@ case $session in
 	i3				) exec i3;;
 	ob				) exec openbox-session;;
 	herb			) sxhkd & exec herbstluftwm;;
-	# bspwm			) exec bspwm;;
-	# cwm				) exec cwm;;
-	# dwm				) exec dwm;;
 esac

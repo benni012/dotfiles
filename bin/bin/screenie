@@ -1,2 +1,2 @@
 #!/bin/sh
-maim "$@" /data/img/scrots/$(date +%F-%T).png
+maim "$@" "$SCROT_DIR/$(date +%F-%T)".png

@@ -1,7 +1,7 @@
 #!/bin/sh
 
-w=${1:-740}
-h=${2:-450}
+w=${1:-800}
+h=${2:-500}
 
 # herbstluftwm sucks with wmutils
 fb=$(ppw $(pfw))

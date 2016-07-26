@@ -12,6 +12,7 @@ alias l="ls --color=auto --group-directories-first -1"
 alias la="ls -lah --color=auto --group-directories-first"
 alias ll="ls -lh --color=auto --group-directories-first"
 alias ls="ls --color=auto --group-directories-first"
+alias pacman="pacaur"
 alias play_bd="mpv -vo vdpau -vd-lavc-threads 8 br:////mnt/cd"
 alias plen="mpc playlist --format '%time%' | awk -F ':' '{ m+=\$1; s+=\$2; } END { res=(m*60+s); printf(\"%02d:%02d:%02d\", int(res/60/60), int(res/60)%60, res%60); }'"
 alias qalc="qalc -e"
@@ -44,9 +45,15 @@ function pre {
 	mpv "$(rf $dir)"
 }
 
-function lsc {
-	i=${1:-1}
-	find $SCROT_DIR | tail -$i
+function lsf {
+	i=${2:-1}
+
+	case $1 in
+		scrot) dir="$SCROT_DIR";;
+		rec) dir="$REC_DIR";;
+	esac
+	
+	find "$dir" | tail -$i
 }
 
 function upl {

@@ -1,0 +1,45 @@
+#!/bin/sh
+pidfile="/tmp/rec_pid"
+
+if [ -f "$pidfile" ]; then
+	kill $(cat "$pidfile")
+	rm "$pidfile"
+	exit 0
+fi
+
+sel=0
+audio=0
+
+while getopts sa opt; do
+	case $opt in
+		a) audio=1;;
+		s) sel=1;;
+	esac
+done
+
+if [ $sel -eq 1 ]; then
+	eval "$(slop)"
+
+	if [ "$Cancel" = "true" ]; then
+		exit 1
+	fi
+else
+	X=0
+	Y=0
+	W=1920
+	H=1080
+fi
+
+recfile="$REC_DIR/$(date +%F-%T).mp4"
+
+if [ -e "$recfile" ]; then
+	exit 1
+fi
+
+if [ $audio -eq 1 ]; then
+	ffmpeg -f x11grab -s "$W"x"$H" -i :0.0+$X,$Y -f pulse -i 1 "$recfile" &
+else
+	ffmpeg -f x11grab -s "$W"x"$H" -i :0.0+$X,$Y "$recfile" &
+fi
+
+echo $! > $pidfile

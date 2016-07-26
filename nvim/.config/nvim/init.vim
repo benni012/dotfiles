@@ -158,8 +158,11 @@ nnoremap J mzJ`z
 " reverse join
 nnoremap K i<CR><Esc>d^==kg_lD
 
+" manpage
+nnoremap <silent> <C-[> K<CR>
+
 " damn you, vim!
-nnoremap Y y$ "
+nnoremap Y y$
 
 " make a numeration
 vnoremap <C-a> :call Incr()<CR>
@@ -170,6 +173,7 @@ com! WP call WordProcessorMode()
 com! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
 com! Wipeout call s:wipeout()
 com! FormatC execute '%g/^\s*\n\s*$/d' | %normal = | nohlsearch | %!indent -kr
+com! Time r!date --iso-8601
 " }}}
 " functions {{{
 
