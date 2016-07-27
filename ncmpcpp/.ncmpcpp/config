@@ -1,6 +1,6 @@
 # my ncmpcpp config
 
-mpd_music_dir = ~/Musik
+mpd_music_dir = ~/music
 
 user_interface = classic
 playlist_display_mode = columns

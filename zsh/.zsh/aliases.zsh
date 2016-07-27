@@ -14,13 +14,12 @@ alias ll="ls -lh --color=auto --group-directories-first"
 alias ls="ls --color=auto --group-directories-first"
 alias pacman="pacaur"
 alias play_bd="mpv -vo vdpau -vd-lavc-threads 8 br:////mnt/cd"
-alias plen="mpc playlist --format '%time%' | awk -F ':' '{ m+=\$1; s+=\$2; } END { res=(m*60+s); printf(\"%02d:%02d:%02d\", int(res/60/60), int(res/60)%60, res%60); }'"
 alias qalc="qalc -e"
 alias rm="rm -I"
 alias rock="ncmpcpp"
 alias sdown="youtube-dl -x --add-metadata --audio-format mp3 -o '%(title)s.%(ext)s'"
 alias startx="startx ~/.xinitrc"
-alias tree='tree -F --dirsfirst'
+alias tree='tree -Fa --dirsfirst'
 alias up="uguush -o mixtape -u "
 alias update="pacaur -Syu"
 alias v="vim"
@@ -28,6 +27,8 @@ alias vim="nvim"
 alias vpn="cd ~/vpn && sudo openvpn"
 alias wee="weechat"
 alias ytdl="youtube-dl --add-metadata --recode-video mp4 -o '%(title)s.%(ext)s'"
+alias sum_time="awk -F ':' '{ m+=\$1; s+=\$2; } END { res=(m*60+s); printf(\"%02d:%02d:%02d\", int(res/60/60), int(res/60)%60, res%60); }'"
+#alias plen="mpc playlist --format '%time%' | awk -F ':' '{ m+=\$1; s+=\$2; } END { res=(m*60+s); printf(\"%02d:%02d:%02d\", int(res/60/60), int(res/60)%60, res%60); }'"
 
 function rf {
 	find $@ -type f | shuf -n1
@@ -61,11 +62,11 @@ function upl {
 }
 
 function lsfilme {
-	ls -1 /data/mov
+	ls -1 "$MOV_DIR"
 }
 
 function lfilme {
-	find /data/mov -type f \( -iname "*.mkv" -o -iname "*.mp4" -o -iname "*.avi" \) -print0 \
+	find "$MOV_DIR" -type f \( -iname "*.mkv" -o -iname "*.mp4" -o -iname "*.avi" \) -print0 \
 	| xargs -0 -i% sh -c '{ echo $(basename "%" | cut -c -60;)" "$(vidlen "%"); }' \
 	| sort \
 	| column -t
@@ -79,4 +80,17 @@ function bdi {
 	sudo mount /dev/sr0 /mnt/cd;
 	play_bd "$@";
 	sudo umount /mnt/cd;
+}
+
+function rlen {
+	plen $(mpc status | sed -n 2p | awk '{ print $2; }' | awk -F / '{ print $1; }' | cut -c 2-)
+}
+
+function plen {
+	n=${1:-1}
+	mpc playlist --format '%time%' | tail -n +$n | sum_time
+}
+
+function sum_time {
+	awk -F ':' '{ m+=$1; s+=$2; } END { res=(m*60+s); printf("%02d:%02d:%02d", int(res/60/60), int(res/60)%60, res%60); }'
 }
