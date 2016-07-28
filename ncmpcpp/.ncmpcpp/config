@@ -27,6 +27,7 @@ incremental_seeking = yes
 seek_time = 1
 volume_change_step = 0
 
+browser_sort_format = {%a - }{%n}
 autocenter_mode = yes
 centered_cursor = yes
 follow_now_playing_lyrics = yes
