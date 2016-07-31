@@ -3,4 +3,7 @@
 t=$(dm -noinput)
 m=${1:-teatime!}
 
-(sleep $t && notify-send "$m") &
+case $t in
+	*:*) echo "notify-send $m" | at $t;;
+	*) (sleep $t && notify-send "$m") &;;
+esac

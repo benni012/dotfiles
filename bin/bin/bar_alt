@@ -8,7 +8,7 @@ clock() {
 }
 
 tea() {
-	if [ $(pgrep -x tt | wc -l) -ge 1 ]; then
+	if [ $(pgrep -x tt | wc -l) -ge 1 -o $(atq | wc -l) -ge 1 ]; then
 		echo "%{F$(xrq *color1)}"
 	else
 		echo "$c"
@@ -67,7 +67,7 @@ playstate() {
 }
 
 playperc() {
-	status=$(mpc | sed '2!d' | mawk '{ print $3 }' | tr ':/' ' ' | mawk '{ print $1*60+$2" "$3*60+$4 }')
+	status=$(mpc status | sed '2!d' | mawk '{ print $3 }' | tr ':/' ' ' | mawk '{ print $1*60+$2" "$3*60+$4 }')
 
 	pos=$(echo "$status" | mawk '{ print $1 }')
 	len=$(echo "$status" | mawk '{ print $2 }')

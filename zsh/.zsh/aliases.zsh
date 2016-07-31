@@ -28,6 +28,7 @@ alias vpn="cd ~/vpn && sudo openvpn"
 alias wee="weechat"
 alias ytdl="youtube-dl --add-metadata --recode-video mp4 -o '%(title)s.%(ext)s'"
 alias sum_time="awk -F ':' '{ m+=\$1; s+=\$2; } END { res=(m*60+s); printf(\"%02d:%02d:%02d\", int(res/60/60), int(res/60)%60, res%60); }'"
+alias gdb="gdb -q"
 #alias plen="mpc playlist --format '%time%' | awk -F ':' '{ m+=\$1; s+=\$2; } END { res=(m*60+s); printf(\"%02d:%02d:%02d\", int(res/60/60), int(res/60)%60, res%60); }'"
 
 function rf {
