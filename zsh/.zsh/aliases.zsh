@@ -95,3 +95,18 @@ function plen {
 function sum_time {
 	awk -F ':' '{ m+=$1; s+=$2; } END { res=(m*60+s); printf("%02d:%02d:%02d", int(res/60/60), int(res/60)%60, res%60); }'
 }
+
+# function man {
+#     LESS_TERMCAP_mb=$'\e[1;31m' \
+#     LESS_TERMCAP_md=$'\e[1;31m' \
+#     LESS_TERMCAP_me=$'\e[0m' \
+#     LESS_TERMCAP_se=$'\e[0m' \
+#     LESS_TERMCAP_so=$'\e[1;44;33m' \
+#     LESS_TERMCAP_ue=$'\e[0m' \
+#     LESS_TERMCAP_us=$'\e[1;32m' \
+#     command man "$@"
+# }
+
+# function man {
+# 	printf ":Man $1 $2\n:bdel 1\n" | vim
+# }
