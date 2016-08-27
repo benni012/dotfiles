@@ -35,10 +35,12 @@ dunst &
 # get rid of the mouse
 unclutter &
 
-session=$1
+session=${1:-herb}
 
 case $session in
 	i3				) exec i3;;
 	ob				) exec openbox-session;;
-	herb			) sxhkd & exec herbstluftwm;;
+	herb			) exec herbstluftwm;;
+	bspwm			) exec bspwm;;
+	*				) echo "unknown";;
 esac

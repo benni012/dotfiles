@@ -13,7 +13,6 @@ colorscheme term
 
 call plug#begin()
 " Plug 'ap/vim-css-color'
-" Plug 'benekastah/neomake'
 " Plug 'justinmk/vim-dirvish'
 " Plug 'justinmk/vim-sneak'
 " Plug 'kiteco/plugins', { 'rtp': 'vim-kite/plugin/kite.vim' }
@@ -21,13 +20,15 @@ call plug#begin()
 " Plug 'mphe/grayout.vim'
 " Plug 'nanotech/jellybeans.vim'
 " Plug 'nhooyr/neoman.vim'
-" Plug 'rking/ag.vim'
 " Plug 'tpope/vim-abolish'
 " Plug 'tpope/vim-eunuch'
 " Plug 'tpope/vim-fugitive'
+Plug 'benekastah/neomake'
 Plug 'jamessan/vim-gnupg'
 Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
 Plug 'mbbill/undotree'
+Plug 'rking/ag.vim'
 Plug 'tpope/vim-characterize'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-obsession'
@@ -102,6 +103,10 @@ set wrap
 set breakindent
 set breakindentopt=sbr
 set showbreak=↪\ 
+
+" limelight 
+let g:limelight_conceal_ctermfg = 240
+
 " }}}
 " keybinds {{{
 
@@ -159,7 +164,7 @@ nnoremap J mzJ`z
 nnoremap K i<CR><Esc>d^==kg_lD
 
 " manpage
-nnoremap <silent> <C-[> K<CR>
+nnoremap <silent> <C-[> K
 
 " damn you, vim!
 nnoremap Y y$
@@ -231,6 +236,10 @@ autocmd BufRead,BufNewFile *.pnc highlight neg ctermfg=red
 
 " disable auto commenting
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+" limelight + goyo
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
 
 " }}}
 " vim:foldmethod=marker:foldlevel=0
