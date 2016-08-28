@@ -1,9 +1,9 @@
 #!/bin/sh
 
-c="%{F$(xrq *color8)}"
-e="%{F-}"
-
-settmp tea_time 10
+cf="%{F$(xrq *color8)}"
+# cb="%{B$(xrq *color5)}"
+ef="%{F-}"
+# eb="%{B-}"
 
 clock() {
 	date "+%d.%m.%Y %H:%M:%S"
@@ -13,7 +13,7 @@ tea() {
 	if [ $(pgrep -x tt | wc -l) -ge 1 -o $(atq | wc -l) -ge 1 ]; then
 		echo "%{F$(xrq *color14)}"
 	else
-		echo "$c"
+		echo "$cf"
 	fi
 }
 
@@ -29,8 +29,8 @@ volume() {
 
 song() {
 	cur=$(mpc current)
-	if [ -n "$cur" ]; then
-		echo "$cur"
+	if [ -n "$cfur" ]; then
+		echo "$cfur"
 	else
 		echo "empty"
 	fi
@@ -40,11 +40,11 @@ desktop() {
 	desktop_name=$(xprop -root _NET_CURRENT_DESKTOP | awk '{print $3}')
 
 	case "$desktop_name" in
-		0) printf '%s\n' "$c⮫$e ⮬ ⮭ ⮮ ⮯";;
-		1) printf '%s\n' "⮫ $c⮬$e ⮭ ⮮ ⮯";;
-		2) printf '%s\n' "⮫ ⮬ $c⮭$e ⮮ ⮯";;
-		3) printf '%s\n' "⮫ ⮬ ⮭ $c⮮$e ⮯";;
-		4) printf '%s\n' "⮫ ⮬ ⮭ ⮮ $c⮯$e";;
+		0) printf '%s\n' "$cf⮫$ef ⮬ ⮭ ⮮ ⮯";;
+		1) printf '%s\n' "⮫ $cf⮬$ef ⮭ ⮮ ⮯";;
+		2) printf '%s\n' "⮫ ⮬ $cf⮭$ef ⮮ ⮯";;
+		3) printf '%s\n' "⮫ ⮬ ⮭ $cf⮮$ef ⮯";;
+		4) printf '%s\n' "⮫ ⮬ ⮭ ⮮ $cf⮯$ef";;
 	esac
 }
 
@@ -62,7 +62,7 @@ playstate() {
 	status=$(mpc status | grep "\[" | awk '{print $1}' | tail -1)
 
 	if [ "$status" = "[playing]" ]; then
-		echo "$c"
+		echo "$cf"
 	else
 		echo ""
 	fi
@@ -80,13 +80,13 @@ playperc() {
 
 
 	if [ -z $pos ]; then
-		printf "${s:0:$clen}"
+		printf "${s:0:$cflen}"
 	else
 		perc=$(( 1 + pos * (${#s} / clen - 1)  / (len + 1) ))
 
 		#perc=$(( pos * ${#s} / (len + 1) ))
 
-		printf "${s:$(( perc * clen )):$clen}"
+		printf "${s:$(( perc * clen )):$cflen}"
 	fi
 }
 
@@ -95,6 +95,8 @@ playperc() {
 handle() {
 	while read data; do
 		case "$data" in
+			ci) count_up;;
+			cr) settmp inf_count 0;;
 			+*|-*) tea_add "$data";;
 			=*) settmp tea_time "$(echo $data | cut -c2-)";;
 			tea_run) tt "$(gettmp tea_time)s";;
@@ -111,24 +113,56 @@ tea_add() {
 	fi
 }
 
+count_up() {
+	if [ $(gettmp inf_count) -lt 25 ]; then
+		settmp inf_count $(($(gettmp inf_count) + 1));
+	fi
+}
+
 tea_gettime () {
 	printf "%3ds" "$(gettmp tea_time)"
 }
 
+count() {
+	c=$1
+
+	while [ $c -ge 5 ]; do
+		printf 'bbbb';
+		c=$((c - 5))
+		if [ $c -gt 0 ]; then
+			printf ' ';
+		fi
+	done
+
+	while [ $c -gt 0 ]; do
+		printf 'a';
+		c=$((c - 1))
+	done
+}
+
+inf_count () {
+	# u suck printf (or im stupid)
+	printf "%-24s" "$(count $(gettmp inf_count))" | sed 's/a/│/g' | sed 's/b/┼/g'
+}
+
+settmp tea_time 0
+settmp inf_count 0
+trap 'rmtmp tea_time; rmtmp inf_count' SIGINT SIGTERM
+
 while :; do
 	buf=""
-	buf="${buf}%{A:tea_run:} $(tea)⮖$e $(clock)%{A}                                                                     $c%{A:-15:}▼ %{A}%{A:-5:}▽ %{A}$e%{A:=10:}$(tea_gettime)%{A}$c%{A:+5:} △%{A}%{A:+15:} ▲%{A}$e"
-	buf="${buf} %{c}$(desktop)"
-	buf="${buf} %{r}$c⮕$e"
+	buf="${buf}%{A:tea_run:} $(tea)⮖$ef $(clock)%{A}"
+	buf="${buf}%{O370}$cf%{A:-15:}▼ %{A}%{A:-5:}▽ %{A}$ef%{A:=10:}$(tea_gettime)%{A}$cf%{A:+5:} △%{A}%{A:+15:} ▲%{A}$ef"
+	buf="${buf}%{c}$(desktop)"
+	buf="${buf}%{r}%{A:ci:}%{A3:cr:}$cf│$ef $(inf_count) $cf│$ef%{A}%{A}%{O330}"
+	buf="${buf}$cf⮕$ef"
 	buf="${buf} $(song)"
-	buf="${buf}$c%{A:mpc prev:} ⮳%{A}%{A:mpc toggle:} $e$(playstate)$(playperc) %{A}$c%{A:mpc next:}⮲ %{A}$e"
-	buf="${buf} $c%{A:vol -:} ⮟ %{A}$e%{A:vol !:} $(volume) %{A}$c%{A:vol +:} ⮞ %{A}$e"
+	buf="${buf}$cf%{A:mpc prev:} ⮳%{A}%{A:mpc toggle:} $ef$(playstate)$(playperc) %{A}$cf%{A:mpc next:}⮲ %{A}$ef"
+	buf="${buf} $cf%{A:vol -:} ⮟ %{A}$ef%{A:vol !:} $(volume) %{A}$cf%{A:vol +:} ⮞ %{A}$ef"
 	echo " $buf"
 	sleep .01
 done | bar | handle
 
-rmtmp tea_time
-
-#buf="${buf} $c%{A:mpc toggle:}$(playstate) %{A}%{A:mpc prev:}⮳%{A} $(playperc) %{A:mpc next:}⮲ %{A}$e"
+#buf="${buf} $cf%{A:mpc toggle:}$(playstate) %{A}%{A:mpc prev:}⮳%{A} $(playperc) %{A:mpc next:}⮲ %{A}$ef"
 #buf="${buf} %{F#a54242}%{A:vol -:} - %{A}%{F-} $(volume) %{F#21a11d}%{A:vol +:} + %{A}%{F-}"
 #buf="${buf}  %{+u}%{B#a54242}%{A:ciao:} ⯉ %{A}%{B-}%{-u}"
