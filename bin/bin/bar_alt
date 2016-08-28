@@ -3,6 +3,8 @@
 c="%{F$(xrq *color8)}"
 e="%{F-}"
 
+settmp tea_time 10
+
 clock() {
 	date "+%d.%m.%Y %H:%M:%S"
 }
@@ -88,9 +90,34 @@ playperc() {
 	fi
 }
 
+
+
+handle() {
+	while read data; do
+		case "$data" in
+			+*|-*) tea_add "$data";;
+			=*) settmp tea_time "$(echo $data | cut -c2-)";;
+			tea_run) tt "$(gettmp tea_time)s";;
+			*) echo "$data" | sh >/dev/null;;
+		esac
+	done
+}
+
+tea_add() {
+	if [ $(($(gettmp tea_time) + $1)) -lt 0 ]; then
+		settmp tea_time 0;
+	else
+		settmp tea_time $(($(gettmp tea_time) + $1));
+	fi
+}
+
+tea_gettime () {
+	printf "%3ds" "$(gettmp tea_time)"
+}
+
 while :; do
 	buf=""
-	buf="${buf}%{A:tt:} $(tea)⮖$e $(clock)%{A}"
+	buf="${buf}%{A:tea_run:} $(tea)⮖$e $(clock)%{A}                                                                     $c%{A:-15:}▼ %{A}%{A:-5:}▽ %{A}$e%{A:=10:}$(tea_gettime)%{A}$c%{A:+5:} △%{A}%{A:+15:} ▲%{A}$e"
 	buf="${buf} %{c}$(desktop)"
 	buf="${buf} %{r}$c⮕$e"
 	buf="${buf} $(song)"
@@ -98,7 +125,9 @@ while :; do
 	buf="${buf} $c%{A:vol -:} ⮟ %{A}$e%{A:vol !:} $(volume) %{A}$c%{A:vol +:} ⮞ %{A}$e"
 	echo " $buf"
 	sleep .01
-done | bar | sh >/dev/null
+done | bar | handle
+
+rmtmp tea_time
 
 #buf="${buf} $c%{A:mpc toggle:}$(playstate) %{A}%{A:mpc prev:}⮳%{A} $(playperc) %{A:mpc next:}⮲ %{A}$e"
 #buf="${buf} %{F#a54242}%{A:vol -:} - %{A}%{F-} $(volume) %{F#21a11d}%{A:vol +:} + %{A}%{F-}"

@@ -1,0 +1,11 @@
+#!/bin/sh
+
+if [ $# -lt 1 ]; then
+	exit 1;
+fi
+
+if [ ! -f "/tmp/tvar_$1" ]; then
+	exit 2;
+fi
+
+cat "/tmp/tvar_$1"

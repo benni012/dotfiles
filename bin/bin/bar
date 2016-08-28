@@ -1,2 +1,2 @@
 #!/bin/mksh
-lemonbar -B $(xrq *background) -F $(xrq *foreground) -f "*-lemon-*" -g 1920x30 $@
+lemonbar -B $(xrq *background) -F $(xrq *foreground) -f "*-lemon-*" -g 1920x30 -a 15 $@
