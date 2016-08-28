@@ -152,7 +152,7 @@ trap 'rmtmp tea_time; rmtmp inf_count' SIGINT SIGTERM
 while :; do
 	buf=""
 	buf="${buf}%{A:tea_run:} $(tea)⮖$ef $(clock)%{A}"
-	buf="${buf}%{O370}$cf%{A:-15:}▼ %{A}%{A:-5:}▽ %{A}$ef%{A:=10:}$(tea_gettime)%{A}$cf%{A:+5:} △%{A}%{A:+15:} ▲%{A}$ef"
+	buf="${buf}%{O370}$cf%{A:-15:}▼ %{A}%{A:-5:}▽ %{A}$ef%{A:+60:}%{A3:=0:}$(tea_gettime)%{A}%{A}$cf%{A:+5:} △%{A}%{A:+15:} ▲%{A}$ef"
 	buf="${buf}%{c}$(desktop)"
 	buf="${buf}%{r}%{A:ci:}%{A3:cr:}$cf│$ef $(inf_count) $cf│$ef%{A}%{A}%{O330}"
 	buf="${buf}$cf⮕$ef"
