@@ -28,11 +28,11 @@ volume() {
 }
 
 song() {
-	cur=$(mpc current)
-	if [ -n "$cfur" ]; then
-		echo "$cfur"
+	cur=$(mpc current | cut -c1-70)
+	if [ -n "$cur" ]; then
+		printf "%100s" "$cf⮕$ef $cur"
 	else
-		echo "empty"
+		printf "%100s" "$cf⮕$ef empty"
 	fi
 }
 
@@ -80,13 +80,13 @@ playperc() {
 
 
 	if [ -z $pos ]; then
-		printf "${s:0:$cflen}"
+		printf "${s:0:$clen}"
 	else
 		perc=$(( 1 + pos * (${#s} / clen - 1)  / (len + 1) ))
 
 		#perc=$(( pos * ${#s} / (len + 1) ))
 
-		printf "${s:$(( perc * clen )):$cflen}"
+		printf "${s:$(( perc * clen )):$clen}"
 	fi
 }
 
@@ -96,6 +96,7 @@ handle() {
 	while read data; do
 		case "$data" in
 			ci) count_up;;
+			cd) count_down;;
 			cr) settmp inf_count 0;;
 			+*|-*) tea_add "$data";;
 			=*) settmp tea_time "$(echo $data | cut -c2-)";;
@@ -106,16 +107,25 @@ handle() {
 }
 
 tea_add() {
-	if [ $(($(gettmp tea_time) + $1)) -lt 0 ]; then
+	tea_time=$(gettmp tea_time)
+	if [ $((tea_time + $1)) -lt 0 ]; then
 		settmp tea_time 0;
 	else
-		settmp tea_time $(($(gettmp tea_time) + $1));
+		settmp tea_time $((tea_time + $1));
 	fi
 }
 
 count_up() {
-	if [ $(gettmp inf_count) -lt 25 ]; then
-		settmp inf_count $(($(gettmp inf_count) + 1));
+	inf_count=$(gettmp inf_count)
+	if [ $inf_count -lt 15 ]; then
+		settmp inf_count $((inf_count + 1));
+	fi
+}
+
+count_down() {
+	inf_count=$(gettmp inf_count)
+	if [ $inf_count  -gt 0 ]; then
+		settmp inf_count $((inf_count - 1));
 	fi
 }
 
@@ -142,7 +152,7 @@ count() {
 
 inf_count () {
 	# u suck printf (or im stupid)
-	printf "%-24s" "$(count $(gettmp inf_count))" | sed 's/a/│/g' | sed 's/b/┼/g'
+	printf "%-14s" "$(count $(gettmp inf_count))" | sed 's/a/│/g' | sed 's/b/┼/g'
 }
 
 settmp tea_time 0
@@ -152,11 +162,10 @@ trap 'rmtmp tea_time; rmtmp inf_count' SIGINT SIGTERM
 while :; do
 	buf=""
 	buf="${buf}%{A:tea_run:} $(tea)⮖$ef $(clock)%{A}"
-	buf="${buf}%{O370}$cf%{A:-15:}▼ %{A}%{A:-5:}▽ %{A}$ef%{A:+60:}%{A3:=0:}$(tea_gettime)%{A}%{A}$cf%{A:+5:} △%{A}%{A:+15:} ▲%{A}$ef"
+	buf="${buf}%{O370}%{A3:=0:}$cf%{A:-15:} ▼%{A}%{A:-5:} ▽%{A}$ef%{A:+60:} $(tea_gettime) %{A}$cf%{A:+5:}△ %{A}%{A:+15:}▲ %{A}$ef%{A}"
 	buf="${buf}%{c}$(desktop)"
-	buf="${buf}%{r}%{A:ci:}%{A3:cr:}$cf│$ef $(inf_count) $cf│$ef%{A}%{A}%{O330}"
-	buf="${buf}$cf⮕$ef"
-	buf="${buf} $(song)"
+	buf="${buf}%{r}%{A:ci:}%{A3:cr:}$cf│$ef $(inf_count) $cf│$ef%{A}%{A}"
+	buf="${buf}$(song)"
 	buf="${buf}$cf%{A:mpc prev:} ⮳%{A}%{A:mpc toggle:} $ef$(playstate)$(playperc) %{A}$cf%{A:mpc next:}⮲ %{A}$ef"
 	buf="${buf} $cf%{A:vol -:} ⮟ %{A}$ef%{A:vol !:} $(volume) %{A}$cf%{A:vol +:} ⮞ %{A}$ef"
 	echo " $buf"
