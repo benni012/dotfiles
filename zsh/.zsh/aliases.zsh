@@ -19,7 +19,7 @@ alias rm="rm -I"
 alias rock="ncmpcpp"
 alias sdown="youtube-dl -x --add-metadata --audio-format mp3 -o '%(title)s.%(ext)s'"
 alias startx="startx ~/.xinitrc"
-alias tree='tree -Fa --dirsfirst'
+alias tree='tree -F --dirsfirst'
 alias up="uguush -o mixtape -u "
 alias update="pacaur -Syu"
 alias v="vim"
@@ -48,7 +48,7 @@ function pre {
 	mpv "$(rf $dir)"
 }
 
-function lsf {
+function lst {
 	i=${2:-1}
 
 	case $1 in
@@ -56,7 +56,8 @@ function lsf {
 		rec) dir="$REC_DIR";;
 	esac
 	
-	find "$dir" | tail -$i
+	file=$(ls -tr $dir | tail -$i)
+	echo -n "$SCROT_DIR/$file"
 }
 
 function upl {

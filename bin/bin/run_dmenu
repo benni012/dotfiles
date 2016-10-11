@@ -1,4 +1,5 @@
 #!/bin/sh
+
 . ~/bin/dmenu_args
 
 #dmenu_run -s 0 -nf "#71c2af" -nb "#273941" -sb "#1d2a30" -sf "#c27171" -i -h 30 -w "${monitor_width}" -q -x 0 -y 30 -fn "${font}" -p ">" -l 3

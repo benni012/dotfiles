@@ -4,6 +4,6 @@ m=teatime!
 t=${1:-$(dm -noinput)}
 
 case $t in
-	*:*) echo "notify-send $m" | at $t;;
-	*) (sleep $t && notify-send "$m") &;;
+	*:*) echo "notify-send -u critical $m" | at $t;;
+	*) (sleep $t && notify-send -u critical "$m") &;;
 esac

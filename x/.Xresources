@@ -21,11 +21,13 @@ URxvt*scrollBar: false
 URxvt*highlightColor: #2f2f2f
 URxvt*internalBorder:  20
 URxvt*skipBuiltinGlyps: true
+!URxvt*lineSpace: 2
 
 !URxvt*depth: 32
 !*background: rgba:2000/2400/2c00/c800
 
-URxvt*font:			xft:PragmataPro:size=17,xft:Source Han Sans Regular
+URxvt*font:			xft:PragmataPro Mono:size=17,xft:Kochi Gothic:antialias=false,xft:Beakmuk Gulim
+URxvt*boldFont:		xft:PragmataPro:style=Bold:size=17,xft:Kochi Gothic:antialias=false,xft:Beakmuk Gulim
 !URxvt*font:			-*-tewi-medium-*-*-*-11-*-*-*-*-*-iso10646-*
 !URxvt*font:			xft:tamsyn
 !URxvt*font:			-*-gohufont-medium-*-*-*-14-*-*-*-*-*-iso10646-*

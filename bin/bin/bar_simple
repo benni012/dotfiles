@@ -1,4 +1,5 @@
-#!/bin/mksh
+#!/bin/sh
+
 # TODO Playstate animation
 
 clock() {

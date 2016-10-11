@@ -39,13 +39,15 @@ song() {
 desktop() {
 	desktop_name=$(xprop -root _NET_CURRENT_DESKTOP | awk '{print $3}')
 
+	printf '%s' '%{A4:herbstclient use_index -1:}%{A5:herbstclient use_index +1:}'
 	case "$desktop_name" in
-		0) printf '%s\n' "$cf⮫$ef ⮬ ⮭ ⮮ ⮯";;
-		1) printf '%s\n' "⮫ $cf⮬$ef ⮭ ⮮ ⮯";;
-		2) printf '%s\n' "⮫ ⮬ $cf⮭$ef ⮮ ⮯";;
-		3) printf '%s\n' "⮫ ⮬ ⮭ $cf⮮$ef ⮯";;
-		4) printf '%s\n' "⮫ ⮬ ⮭ ⮮ $cf⮯$ef";;
+		0) printf '%s' "$cf⮫$ef ⮬ ⮭ ⮮ ⮯";;
+		1) printf '%s' "⮫ $cf⮬$ef ⮭ ⮮ ⮯";;
+		2) printf '%s' "⮫ ⮬ $cf⮭$ef ⮮ ⮯";;
+		3) printf '%s' "⮫ ⮬ ⮭ $cf⮮$ef ⮯";;
+		4) printf '%s' "⮫ ⮬ ⮭ ⮮ $cf⮯$ef";;
 	esac
+	printf '%s' '%{A}%{A}'
 }
 
 #playstate() {
