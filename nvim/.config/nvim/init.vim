@@ -164,7 +164,7 @@ nnoremap J mzJ`z
 nnoremap K i<CR><Esc>d^==kg_lD
 
 " manpage
-nnoremap <silent> <C-[> K
+nnoremap <silent> <C-'> K
 
 " damn you, vim!
 nnoremap Y y$

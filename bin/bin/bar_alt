@@ -6,7 +6,7 @@ ef="%{F-}"
 # eb="%{B-}"
 
 clock() {
-	date "+%d.%m.%Y %H:%M:%S"
+	date "+%A, %d.%m.%Y %H:%M:%S"
 }
 
 tea() {
@@ -30,9 +30,9 @@ volume() {
 song() {
 	cur=$(mpc current | cut -c1-70)
 	if [ -n "$cur" ]; then
-		printf "%100s" "$cf⮕$ef $cur"
+		printf "%95s" "$cf⮕$ef $cur"
 	else
-		printf "%100s" "$cf⮕$ef empty"
+		printf "%95s" "$cf⮕$ef empty"
 	fi
 }
 
@@ -119,7 +119,7 @@ tea_add() {
 
 count_up() {
 	inf_count=$(gettmp inf_count)
-	if [ $inf_count -lt 15 ]; then
+	if [ $inf_count -lt 20 ]; then
 		settmp inf_count $((inf_count + 1));
 	fi
 }
@@ -154,7 +154,7 @@ count() {
 
 inf_count () {
 	# u suck printf (or im stupid)
-	printf "%-14s" "$(count $(gettmp inf_count))" | sed 's/a/│/g' | sed 's/b/┼/g'
+	printf "%-19s" "$(count $(gettmp inf_count))" | sed 's/a/│/g' | sed 's/b/┼/g'
 }
 
 settmp tea_time 0

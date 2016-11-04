@@ -5,5 +5,5 @@ t=${1:-$(dm -noinput)}
 
 case $t in
 	*:*) echo "notify-send -u critical $m" | at $t;;
-	*) (sleep $t && notify-send -u critical "$m") &;;
+	*) (sleep $t && notify-send -u critical "$m" && test $(gettmp inf_count) -lt 20 && settmp inf_count $(($(gettmp inf_count) + 1))) &;;
 esac
