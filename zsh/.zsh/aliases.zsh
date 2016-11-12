@@ -61,7 +61,7 @@ function lst {
 }
 
 function upl {
-	lsf ${1:-scrot} | xargs -I % uguush -o mixtape -u %
+	lst ${1:-scrot} | xargs -I % uguush -o mixtape -u %
 }
 
 function lsfilme {
