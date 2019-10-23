@@ -16,9 +16,9 @@ state() {
 test $# -eq 0 && echo "`level` `state`" && exit 0
 
 case $1 in
-    +)      pactl set-sink-volume 1 +5% >/dev/null;;
-    -)      pactl set-sink-volume 1 -5% >/dev/null;;
-    !)      pactl set-sink-mute 1 toggle >/dev/null;;
+    +)      pactl set-sink-volume @DEFAULT_SINK@ +5% >/dev/null;;
+    -)      pactl set-sink-volume @DEFAULT_SINK@ -5% >/dev/null;;
+    !)      pactl set-sink-mute @DEFAULT_SINK@ toggle >/dev/null;;
     state|level) $1;;
-    *)    	pactl set-sink-volume 1 $1% >/dev/null;;
+    *)    	pactl set-sink-volume @DEFAULT_SINK@ $1% >/dev/null;;
 esac

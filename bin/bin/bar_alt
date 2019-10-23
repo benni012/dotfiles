@@ -1,12 +1,16 @@
-#!/bin/sh
+#!/bin/bash
+
+update_counter=1000
 
 cf="%{F$(xrq *color8)}"
-# cb="%{B$(xrq *color5)}"
 ef="%{F-}"
-# eb="%{B-}"
+
+cb="%{B$(xrq *color5)}"
+cb2="%{B$(xrq *color8)}"
+eb="%{B-}"
 
 clock() {
-	date "+%A, %d.%m.%Y %H:%M:%S"
+	date "+%A, %d.%m.%Y %H:%M"
 }
 
 tea() {
@@ -37,7 +41,13 @@ song() {
 }
 
 desktop() {
-	desktop_name=$(xprop -root _NET_CURRENT_DESKTOP | awk '{print $3}')
+	num_monitors=$(herbstclient list_monitors | wc -l)
+	if [[ $num_monitors > 1 ]]; then
+		desktop_name=$(herbstclient tag_status $1 | grep -o '[+#][0-9]' | cut -c2-)
+		desktop_name=$(( desktop_name - 1 ))
+	else
+		desktop_name=$(xprop -root _NET_CURRENT_DESKTOP | awk '{print $3}')
+	fi
 
 	printf '%s' '%{A4:herbstclient use_index -1:}%{A5:herbstclient use_index +1:}'
 	case "$desktop_name" in
@@ -96,6 +106,9 @@ playperc() {
 
 handle() {
 	while read data; do
+		# gdb --batch-silent -ex "attach $$" -ex 'set bind_variable("a", "4", 0)';
+		kill -USR2 $$ &
+		# echo ayy
 		case "$data" in
 			ci) count_up;;
 			cd) count_down;;
@@ -157,22 +170,75 @@ inf_count () {
 	printf "%-19s" "$(count $(gettmp inf_count))" | sed 's/a/│/g' | sed 's/b/┼/g'
 }
 
+batt () {
+	bat=$(upower -i /org/freedesktop/UPower/devices/DisplayDevice | grep percentage | mawk '{print $2}' | sed 's/%//' | sed 's/\..*$//')
+	state=$(upower -i /org/freedesktop/UPower/devices/DisplayDevice | grep state | awk '{print $2}')
+	color="$cb"
+
+	if [ "$state" = "charging" ] || [ "$state" = "fully-charged" ]; then
+		color="$cb2";
+	fi
+		
+	# s=' ▁▂▃▄▅▆▇█'
+	#s='    █   ██  ███ ████'
+	s="%$color%$eb          %$color %$eb         %$color  %$eb        %$color   %$eb       %$color    %$eb      %$color     %$eb     %$color      %$eb    %$color       %$eb   %$color        %$eb  %$color         %$eb %$color          %$eb"
+
+
+
+	pos=$bat
+	# pos=$(shuf -i 0-100 -n1)
+	len=100
+
+	clen=28
+	printf "%$cb2 %$eb"
+	if [ -z $pos ]; then
+		printf "${s:0:$clen}"
+	else
+		perc=$(( 1 + pos * (${#s} / clen - 1)  / (len + 1) ))
+
+		#perc=$(( pos * ${#s} / (len + 1) ))
+
+		printf "${s:$(( perc * clen )):$clen}"
+	fi
+	printf "%$cb2 %$eb"
+}
+
+br_get() {
+	printf "%02d" $(brightness get)
+}
+
 settmp tea_time 0
 settmp inf_count 0
-trap 'rmtmp tea_time; rmtmp inf_count' SIGINT SIGTERM
+trap 'rmtmp tea_time; rmtmp inf_count;' INT TERM
+trap 'update_counter=1000; echo ayy;' USR2
+
+num_monitors=$(herbstclient list_monitors | wc -l)
+
 
 while :; do
-	buf=""
-	buf="${buf}%{A:tea_run:} $(tea)⮖$ef $(clock)%{A}"
-	buf="${buf}%{O370}%{A3:=0:}$cf%{A:-15:} ▼%{A}%{A:-5:} ▽%{A}$ef%{A:+60:} $(tea_gettime) %{A}$cf%{A:+5:}△ %{A}%{A:+15:}▲ %{A}$ef%{A}"
-	buf="${buf}%{c}$(desktop)"
-	buf="${buf}%{r}%{A:ci:}%{A3:cr:}$cf│$ef $(inf_count) $cf│$ef%{A}%{A}"
-	buf="${buf}$(song)"
-	buf="${buf}$cf%{A:mpc prev:} ⮳%{A}%{A:mpc toggle:} $ef$(playstate)$(playperc) %{A}$cf%{A:mpc next:}⮲ %{A}$ef"
-	buf="${buf} $cf%{A:vol -:} ⮟ %{A}$ef%{A:vol !:} $(volume) %{A}$cf%{A:vol +:} ⮞ %{A}$ef"
-	echo " $buf"
-	sleep .01
-done | bar | handle
+	if [[ $update_counter -gt 99 ]]; then
+		lbuf=""
+		lbuf="${lbuf}%{A:tea_run:} $(tea)⮖$ef $(clock)%{A}"
+		# buf="${buf}%{O370}%{A3:=0:}$cf%{A:-15:} ▼%{A}%{A:-5:} ▽%{A}$ef%{A:+60:} $(tea_gettime) %{A}$cf%{A:+5:}△ %{A}%{A:+15:}▲ %{A}$ef%{A}"
+		# buf="${buf}%{O370}$cf%{A:brightness dec 5:} - %{A}$ef$(br_get)$cf%{A:brightness inc 5:} + %{A}$ef"
+		lbuf="${lbuf}"
+		# buf="${buf}%{r}%{A:ci:}%{A3:cr:}$cf│$ef $(inf_count) $cf│$ef%{A}%{A}"
+		rbuf=""
+		rbuf="${rbuf}%{r}%{A4:brightness inc 5:}%{A5:brightness dec 5:}$(batt)%{A}%{A}"
+		# buf="${buf}$(song)"
+		# buf="${buf}$cf%{A:mpc prev:} ⮳%{A}%{A:mpc toggle:} $ef$(playstate)$(playperc) %{A}$cf%{A:mpc next:}⮲ %{A}$ef"
+		rbuf="${rbuf} $cf%{A:vol -:} ⮟ %{A}$ef%{A:vol !:}%{A3:vol 50:} $(volume) %{A}%{A}$cf%{A:vol +:} ⮞ %{A}$ef"
+		update_counter=0
+	fi
+
+	if [[ $num_monitors -gt 1 ]]; then
+		echo " $lbuf%{c}$(desktop 1)$rbuf %{l}%{S+}$lbuf%{c}$(desktop 0)$rbuf"
+	else
+		echo " $lbuf%{c}$(desktop 1)$rbuf"
+	fi
+	sleep .5
+	update_counter=$(( update_counter + 1 ))
+done | tee /dev/stderr | bar | handle
 
 #buf="${buf} $cf%{A:mpc toggle:}$(playstate) %{A}%{A:mpc prev:}⮳%{A} $(playperc) %{A:mpc next:}⮲ %{A}$ef"
 #buf="${buf} %{F#a54242}%{A:vol -:} - %{A}%{F-} $(volume) %{F#21a11d}%{A:vol +:} + %{A}%{F-}"

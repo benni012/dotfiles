@@ -6,7 +6,9 @@ user_interface = classic
 playlist_display_mode = columns
 mouse_support = no
 
-progressbar_look = "─╼╌"
+
+progressbar_look = ▃▃▃
+#progressbar_look = "─╼╌"
 #progressbar_look = "───"
 progressbar_boldness = yes 
 visualizer_fifo_path = /tmp/mpd.fifo

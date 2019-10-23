@@ -1,5 +1,5 @@
 [global]
-    font = lemon 8
+    font = PragmataPro 20
     
     # Allow a small subset of html markup:
     #   <b>bold</b>
@@ -211,7 +211,7 @@
 
 [beep]
 	summary = "*"
-	script = .config/dunst/dunst_beep.sh
+	script = ~/.config/dunst/dunst_beep.sh
 #[espeak]
 #    summary = "*"
 #    script = dunst_espeak.sh

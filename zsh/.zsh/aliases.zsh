@@ -1,4 +1,5 @@
 alias ....="cd ../../.."
+alias swipl="swipl -q"
 alias ...="cd ../.."
 alias ..="cd .."
 alias :q="exit"
@@ -12,28 +13,35 @@ alias l="ls --color=auto --group-directories-first -1"
 alias la="ls -lah --color=auto --group-directories-first"
 alias ll="ls -lh --color=auto --group-directories-first"
 alias ls="ls --color=auto --group-directories-first"
-alias pacman="pacaur"
 alias play_bd="mpv -vo vdpau -vd-lavc-threads 8 br:////mnt/cd"
 alias qalc="qalc -e"
+alias pacman="sudo pacman"
 alias rm="rm -I"
 alias rock="ncmpcpp"
 alias sdown="youtube-dl -x --add-metadata --audio-format mp3 -o '%(title)s.%(ext)s'"
 alias startx="startx ~/.xinitrc"
 alias tree='tree -F --dirsfirst'
 alias up="uguush -o mixtape -u "
-alias update="pacaur -Syu"
+alias update="pacman -Syu"
 alias v="vim"
 alias vim="nvim"
-alias vpn="cd ~/vpn && sudo openvpn"
+alias vpn="wg-quick"
 alias wee="weechat"
 alias ytdl="youtube-dl --add-metadata --recode-video mp4 -o '%(title)s.%(ext)s'"
 alias sum_time="awk -F ':' '{ m+=\$1; s+=\$2; } END { res=(m*60+s); printf(\"%02d:%02d:%02d\", int(res/60/60), int(res/60)%60, res%60); }'"
 alias gdb="gdb -q"
 alias clisp="clisp -q"
+alias hs="history 0 | grep -i"
+
 #alias plen="mpc playlist --format '%time%' | awk -F ':' '{ m+=\$1; s+=\$2; } END { res=(m*60+s); printf(\"%02d:%02d:%02d\", int(res/60/60), int(res/60)%60, res%60); }'"
 
 function rf {
 	find $@ -type f | shuf -n1
+}
+
+function fach {
+	cd ~/doc/studium/uebungen_etc/?."$1"
+	l
 }
 
 function pre {
@@ -73,6 +81,14 @@ function lfilme {
 	| xargs -0 -i% sh -c '{ echo $(basename "%" | cut -c -60;)" "$(vidlen "%"); }' \
 	| sort \
 	| column -t
+}
+
+function uloc {
+	sort -u $@ | wc -l
+}
+
+function ulocstat {
+	sort $@ | sed 's/^[ \t]*//;s/[ \t]*$//' | sort | uniq -c | sort -k 1,1 -g
 }
 
 function filme {

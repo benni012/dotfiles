@@ -23,7 +23,11 @@ call plug#begin()
 " Plug 'tpope/vim-abolish'
 " Plug 'tpope/vim-eunuch'
 " Plug 'tpope/vim-fugitive'
+" Plug 'Shougo/deoplete.nvim'
+" Plug 'tpope/vim-obsession'
+
 Plug 'benekastah/neomake'
+Plug 'jremmen/vim-ripgrep'
 Plug 'jamessan/vim-gnupg'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
@@ -31,7 +35,6 @@ Plug 'mbbill/undotree'
 Plug 'rking/ag.vim'
 Plug 'tpope/vim-characterize'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
@@ -66,6 +69,8 @@ set hlsearch
 
 " show next match while typing
 set incsearch
+" show replaces on the fly
+set inccommand=nosplit
 
 " ignore case
 set ignorecase
@@ -106,6 +111,13 @@ set showbreak=↪\
 
 " limelight 
 let g:limelight_conceal_ctermfg = 240
+
+" deoplete
+let g:deoplete#enable_at_startup = 1
+
+" no syntax autoindent
+filetype indent off
+filetype plugin off
 
 " }}}
 " keybinds {{{
@@ -172,6 +184,28 @@ nnoremap Y y$
 " make a numeration
 vnoremap <C-a> :call Incr()<CR>
 " }}}
+" abbrev {{{
+inoreabbrev ;forall; ∀
+inoreabbrev ;exists; ∃
+inoreabbrev ;E; ∈
+inoreabbrev ;<=; ≤
+inoreabbrev ;>=; ≥
+inoreabbrev ;^2; ²
+inoreabbrev ;^3; ³
+inoreabbrev ;C=; ⊆
+inoreabbrev ;C; ⊂
+inoreabbrev ;not; ¬
+inoreabbrev ;and; ∧
+inoreabbrev ;or; ∨
+inoreabbrev ;->; →
+inoreabbrev ;=>; ⇒
+inoreabbrev ;<>; ⇔
+inoreabbrev ;!=; ≠
+inoreabbrev ;t; \texttt{
+
+" inoreabbrev ,U, 
+" inoreabbrev ,u, 
+" }}}
 " commands {{{
 
 com! WP call WordProcessorMode()
@@ -234,12 +268,23 @@ autocmd BufRead,BufNewFile *.pnc syntax match neg "^\s*-.*$"
 autocmd BufRead,BufNewFile *.pnc highlight pos ctermfg=green
 autocmd BufRead,BufNewFile *.pnc highlight neg ctermfg=red
 
+" hoare filetype
+autocmd BufRead,BufNewFile *.hoare set filetype=java
+autocmd BufRead,BufNewFile *.hoare syntax match assertion "^\s*<.*>\s*$" 
+autocmd BufRead,BufNewFile *.hoare highlight assertion ctermfg=darkblue
+
 " disable auto commenting
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " limelight + goyo
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
+
+" spaces instead of tabs in .hs
+autocmd! BufRead,BufNewFile *.hs set expandtab
+
+" tex no indent
+autocmd! BufRead,BufNewFile *.tex set indentexpr=
 
 " }}}
 " vim:foldmethod=marker:foldlevel=0
