@@ -1,0 +1,10 @@
+#!/bin/sh
+
+while true; do
+	fn_new="$(spotify_dbus_status --cover)"
+	if [ "$fn" != "$fn_new" ]; then
+		fn="$fn_new"
+		curl -Lo /tmp/spotify_cover "$fn"
+	fi
+	sleep .1s
+done

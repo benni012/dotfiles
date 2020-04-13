@@ -21,13 +21,14 @@ URxvt*scrollBar: false
 URxvt*highlightColor: #2f2f2f
 URxvt*internalBorder:  20
 URxvt*skipBuiltinGlyps: true
-!URxvt*lineSpace: 2
+URxvt*lineSpace: 2
 
 !URxvt*depth: 32
 !*background: rgba:2000/2400/2c00/c800
 
-URxvt*font:			xft:PragmataPro Mono:size=17,xft:Kochi Gothic:antialias=true,xft:Beakmuk Gulim
-URxvt*boldFont:		xft:PragmataPro:style=Bold:size=17,xft:Kochi Gothic:antialias=true,xft:Beakmuk Gulim
+URxvt*font:			xft:PragmataPro Mono:size=17
+URxvt*boldFont:			xft:PragmataPro Mono:size=17
+/* URxvt*boldFont:		xft:PragmataPro:style=Bold:size=17 */
 !URxvt*font:			-*-tewi-medium-*-*-*-11-*-*-*-*-*-iso10646-*
 !URxvt*font:			xft:tamsyn
 !URxvt*font:			-*-gohufont-medium-*-*-*-14-*-*-*-*-*-iso10646-*
@@ -38,9 +39,16 @@ URxvt*boldFont:		xft:PragmataPro:style=Bold:size=17,xft:Kochi Gothic:antialias=t
 
 !xft.antialias: 1
 xft.autohint: 0
-xft.hinting: 0
-!xft.hintstyle: hintfull
+xft.hinting: 1
+xft.hintstyle: hintfull
 !xft.rgba: rgb
 !xft.lcdfilter:  lcddefault
 
-xft.dpi: 92
+Xft.dpi: 92
+
+rofi.font: PragmataPro Mono 12
+rofi.theme: genmaicha
+rofi.color-window: #eeeeee
+rofi.color-normal: #3c4f5b
+rofi.color-urgent: #3c4f5b
+rofi.color-active: #3c4f5b

@@ -1,0 +1,803 @@
+#compdef pijul
+
+autoload -U is-at-least
+
+_pijul() {
+    typeset -A opt_args
+    typeset -a _arguments_options
+    local ret=1
+
+    if is-at-least 5.2; then
+        _arguments_options=(-s -S -C)
+    else
+        _arguments_options=(-s -C)
+    fi
+
+    local context curcontext="$curcontext" state line
+    _arguments "${_arguments_options[@]}" \
+'-h[Prints help information]' \
+'--help[Prints help information]' \
+'-V[Prints version information]' \
+'--version[Prints version information]' \
+":: :_pijul_commands" \
+"*::: :->pijul" \
+&& ret=0
+    case $state in
+    (pijul)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:pijul-command-$line[1]:"
+        case $line[1] in
+            (log)
+_arguments "${_arguments_options[@]}" \
+'--repository=[Path to the repository to list.]' \
+'--branch=[The branch to list.]' \
+'*--internal-id=[Display only patches with these internal identifiers.]' \
+'*--path=[Only display patches that touch the given path.]' \
+'*--grep=[Search patch name and description with a regular expression.]' \
+'--hash-only[Only display the hash of each path.]' \
+'-h[Prints help information]' \
+'--help[Prints help information]' \
+'-V[Prints version information]' \
+'--version[Prints version information]' \
+&& ret=0
+;;
+(info)
+_arguments "${_arguments_options[@]}" \
+'--from-inode=[Inode to start the graph from.]' \
+'--debug[Pijul info will be given about this directory.]' \
+'-a[]' \
+'--exclude-parents[]' \
+'-f[show only folder edges]' \
+'--introducedby[]' \
+'-h[Prints help information]' \
+'--help[Prints help information]' \
+'-V[Prints version information]' \
+'--version[Prints version information]' \
+&& ret=0
+;;
+(init)
+_arguments "${_arguments_options[@]}" \
+'-h[Prints help information]' \
+'--help[Prints help information]' \
+'-V[Prints version information]' \
+'--version[Prints version information]' \
+'::directory -- Where to create the repository, defaults to the current directory.:_files' \
+&& ret=0
+;;
+(record)
+_arguments "${_arguments_options[@]}" \
+'*--depends-on=[Add a dependency to this patch (internal id or hash accepted)]' \
+'--repository=[The repository where to record, defaults to the current directory.]' \
+'--branch=[The branch where to record, defaults to the current branch.]' \
+'--date=[The date to use to record the patch, default is now.]' \
+'-m+[The name of the patch to record]' \
+'--message=[The name of the patch to record]' \
+'-d+[The description of the patch to record]' \
+'--description=[The description of the patch to record]' \
+'-A+[Author of this patch (multiple occurrences allowed)]' \
+'--author=[Author of this patch (multiple occurrences allowed)]' \
+'-a[Answer '\''y'\'' to all questions]' \
+'--all[Answer '\''y'\'' to all questions]' \
+'-n[Offer to add files that have been created since the last record]' \
+'--add-new-files[Offer to add files that have been created since the last record]' \
+'--no-editor[Do not use an editor to write the patch name and description, even if the variable is set in the configuration file]' \
+'(--myers)--patience[Use patience diff instead of the default (Myers diff)]' \
+'(--patience)--myers[Use Myers diff]' \
+'-h[Prints help information]' \
+'--help[Prints help information]' \
+'-V[Prints version information]' \
+'--version[Prints version information]' \
+'::prefix -- Prefix to start from:_files' \
+&& ret=0
+;;
+(unrecord)
+_arguments "${_arguments_options[@]}" \
+'--repository=[Local repository.]' \
+'--branch=[Branch.]' \
+'-h[Prints help information]' \
+'--help[Prints help information]' \
+'-V[Prints version information]' \
+'--version[Prints version information]' \
+'::patch -- Patch to unrecord.:_files' \
+&& ret=0
+;;
+(add)
+_arguments "${_arguments_options[@]}" \
+'--repository=[Add the files to this repository. Defaults to the repository containing the current directory.]' \
+'--recursive[Add repositories recursively.]' \
+'-h[Prints help information]' \
+'--help[Prints help information]' \
+'-V[Prints version information]' \
+'--version[Prints version information]' \
+':files -- Files to add to the repository.:_files' \
+&& ret=0
+;;
+(pull)
+_arguments "${_arguments_options[@]}" \
+'--repository=[Repository to list.]' \
+'--from-branch=[The branch to pull from. Defaults to master.]' \
+'--to-branch=[The branch to pull into. Defaults to the current branch.]' \
+'--set-remote=[Name this remote destination.]' \
+'--path=[Only pull patches relative to that patch.]' \
+'-p+[Port of the remote ssh server.]' \
+'--port=[Port of the remote ssh server.]' \
+'-a[Answer '\''y'\'' to all questions]' \
+'--all[Answer '\''y'\'' to all questions]' \
+'--set-default[Used with --set-remote, sets this remote as the default pull remote.]' \
+'-h[Prints help information]' \
+'--help[Prints help information]' \
+'-V[Prints version information]' \
+'--version[Prints version information]' \
+'::remote -- Repository from which to pull.:_files' \
+&& ret=0
+;;
+(push)
+_arguments "${_arguments_options[@]}" \
+'--repository=[Repository to list.]' \
+'--from-branch=[The branch to push from]' \
+'--to-branch=[The branch to push into. Defaults to the current branch.]' \
+'--set-remote=[Set the name of this remote]' \
+'*--path=[Only pull patches relative to that patch.]' \
+'-p+[Port of the remote ssh server.]' \
+'--port=[Port of the remote ssh server.]' \
+'-a[Answer '\''y'\'' to all questions.]' \
+'--all[Answer '\''y'\'' to all questions.]' \
+'--force[Force the push even if non fast-forward.]' \
+'--set-default[Used with --set-remote, sets this remote as the default push target.]' \
+'-h[Prints help information]' \
+'--help[Prints help information]' \
+'-V[Prints version information]' \
+'--version[Prints version information]' \
+'::remote -- Repository to push to.:_files' \
+&& ret=0
+;;
+(apply)
+_arguments "${_arguments_options[@]}" \
+'--repository=[Path to the repository where the patches will be applied. Defaults to the repository containing the current directory.]' \
+'--branch=[The branch to which the patches will be applied. Defaults to the current branch.]' \
+'--json[Accept patch in JSON format (for debugging only).]' \
+'--no-output[Only apply the patch, don'\''t output it to the repository.]' \
+'-h[Prints help information]' \
+'--help[Prints help information]' \
+'-V[Prints version information]' \
+'--version[Prints version information]' \
+'::patch -- Hash of the patch to apply, in base58. If no patch is given, patches are read from the standard input.:_files' \
+&& ret=0
+;;
+(clone)
+_arguments "${_arguments_options[@]}" \
+'--from-branch=[The branch to pull from]' \
+'--to-branch=[The branch to pull into]' \
+'--path=[Only pull patches relative to that path.]' \
+'*--patch=[Pull a patch and its dependencies.]' \
+'-p+[Port of the remote ssh server.]' \
+'--port=[Port of the remote ssh server.]' \
+'-h[Prints help information]' \
+'--help[Prints help information]' \
+'-V[Prints version information]' \
+'--version[Prints version information]' \
+':from -- Repository to clone.:_files' \
+'::to -- Target.:_files' \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" \
+'--repository=[Repository to remove files from.]' \
+'-h[Prints help information]' \
+'--help[Prints help information]' \
+'-V[Prints version information]' \
+'--version[Prints version information]' \
+':files -- Files to remove from the repository.:_files' \
+&& ret=0
+;;
+(mv)
+_arguments "${_arguments_options[@]}" \
+'--repository=[Repository where the files are.]' \
+'-h[Prints help information]' \
+'--help[Prints help information]' \
+'-V[Prints version information]' \
+'--version[Prints version information]' \
+':files -- Files to move.:_files' \
+&& ret=0
+;;
+(ls)
+_arguments "${_arguments_options[@]}" \
+'--repository=[Repository to list.]' \
+'-h[Prints help information]' \
+'--help[Prints help information]' \
+'-V[Prints version information]' \
+'--version[Prints version information]' \
+'::dir -- Prefix of the list:_files' \
+&& ret=0
+;;
+(revert)
+_arguments "${_arguments_options[@]}" \
+'--repository=[Local repository.]' \
+'--branch=[Branch to revert to.]' \
+'-a[Answer '\''y'\'' to all questions]' \
+'--all[Answer '\''y'\'' to all questions]' \
+'(--myers)--patience[Use patience diff instead of the default (Myers diff)]' \
+'(--patience)--myers[Use Myers diff]' \
+'-h[Prints help information]' \
+'--help[Prints help information]' \
+'-V[Prints version information]' \
+'--version[Prints version information]' \
+'::prefix -- Prefix to start from:_files' \
+&& ret=0
+;;
+(patch)
+_arguments "${_arguments_options[@]}" \
+'--repository=[Path to the repository where the patches will be applied.]' \
+'--bin[Output the patch in binary.]' \
+'--name[Output the patch name.]' \
+'--description[Output the patch description.]' \
+'--authors[Output the patch authors.]' \
+'--date[Output the patch date.]' \
+'-h[Prints help information]' \
+'--help[Prints help information]' \
+'-V[Prints version information]' \
+'--version[Prints version information]' \
+':patch -- The hash of the patch to be printed.:_files' \
+&& ret=0
+;;
+(fork)
+_arguments "${_arguments_options[@]}" \
+'--repository=[Local repository.]' \
+'--branch=[Branch.]' \
+'--patch=[A patch hash, preferably a tag.]' \
+'-h[Prints help information]' \
+'--help[Prints help information]' \
+'-V[Prints version information]' \
+'--version[Prints version information]' \
+':to -- Name of the new branch.:_files' \
+&& ret=0
+;;
+(branches)
+_arguments "${_arguments_options[@]}" \
+'--repository=[Path to a pijul repository. Defaults to the repository containing the current directory.]' \
+'-h[Prints help information]' \
+'--help[Prints help information]' \
+'-V[Prints version information]' \
+'--version[Prints version information]' \
+&& ret=0
+;;
+(prune)
+_arguments "${_arguments_options[@]}" \
+'--repository=[Local repository.]' \
+'-h[Prints help information]' \
+'--help[Prints help information]' \
+'-V[Prints version information]' \
+'--version[Prints version information]' \
+':branch -- Branch to delete.:_files' \
+&& ret=0
+;;
+(checkout)
+_arguments "${_arguments_options[@]}" \
+'--repository=[Local repository.]' \
+'--path=[Partial path to check out.]' \
+'-f[Only check files moves, deletions and additions (much faster).]' \
+'--force[Only check files moves, deletions and additions (much faster).]' \
+'-h[Prints help information]' \
+'--help[Prints help information]' \
+'-V[Prints version information]' \
+'--version[Prints version information]' \
+'::branch -- Branch to switch to.:_files' \
+&& ret=0
+;;
+(diff)
+_arguments "${_arguments_options[@]}" \
+'--repository=[The repository to show, defaults to the current directory.]' \
+'--branch=[The branch to show, defaults to the current branch.]' \
+'(--myers)--patience[Use patience diff instead of the default (Myers diff)]' \
+'(--patience)--myers[Use Myers diff]' \
+'-h[Prints help information]' \
+'--help[Prints help information]' \
+'-V[Prints version information]' \
+'--version[Prints version information]' \
+'::prefix -- Prefix to start from:_files' \
+&& ret=0
+;;
+(credit)
+_arguments "${_arguments_options[@]}" \
+'--repository=[Local repository.]' \
+'--branch=[The branch to annotate, defaults to the current branch.]' \
+'-h[Prints help information]' \
+'--help[Prints help information]' \
+'-V[Prints version information]' \
+'--version[Prints version information]' \
+':file -- File to annotate.:_files' \
+&& ret=0
+;;
+(dist)
+_arguments "${_arguments_options[@]}" \
+'-d+[File name of the output archive.]' \
+'--branch=[The branch from which to make the archive, defaults to the current branch.]' \
+'--repository=[Repository where to work.]' \
+'-s[Prints the resulting archive to stdout]' \
+'--stdout[Prints the resulting archive to stdout]' \
+'-h[Prints help information]' \
+'--help[Prints help information]' \
+'-V[Prints version information]' \
+'--version[Prints version information]' \
+'::dir -- Directory (or file) to archive, defaults to the whole repository.:_files' \
+&& ret=0
+;;
+(key)
+_arguments "${_arguments_options[@]}" \
+'-h[Prints help information]' \
+'--help[Prints help information]' \
+'-V[Prints version information]' \
+'--version[Prints version information]' \
+":: :_pijul__key_commands" \
+"*::: :->key" \
+&& ret=0
+case $state in
+    (key)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:pijul-key-command-$line[1]:"
+        case $line[1] in
+            (upload)
+_arguments "${_arguments_options[@]}" \
+'-p+[Port of the SSH server.]' \
+'--port=[Port of the SSH server.]' \
+'--local[Save keys for the local repository only]' \
+'-h[Prints help information]' \
+'--help[Prints help information]' \
+'-V[Prints version information]' \
+'--version[Prints version information]' \
+':address -- Address to use, for instance pijul_org@nest.pijul.com.:_files' \
+&& ret=0
+;;
+(gen)
+_arguments "${_arguments_options[@]}" \
+'--signing-id=[Generate a signing key for this user id (user ids are email addresses)]' \
+'--for-repository=[Save keys for the given repository only]' \
+'-h[Prints help information]' \
+'--help[Prints help information]' \
+'-V[Prints version information]' \
+'--version[Prints version information]' \
+&& ret=0
+;;
+(register)
+_arguments "${_arguments_options[@]}" \
+'-h[Prints help information]' \
+'--help[Prints help information]' \
+'-V[Prints version information]' \
+'--version[Prints version information]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" \
+'-h[Prints help information]' \
+'--help[Prints help information]' \
+'-V[Prints version information]' \
+'--version[Prints version information]' \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(rollback)
+_arguments "${_arguments_options[@]}" \
+'--repository=[The repository where to record, defaults to the current directory.]' \
+'--branch=[The branch where to record, defaults to the current branch.]' \
+'--date=[The date to use to record the patch, default is now.]' \
+'-m+[The name of the patch to record]' \
+'--message=[The name of the patch to record]' \
+'-d+[The description of the patch to record]' \
+'--description=[The description of the patch to record]' \
+'-A+[Author of this patch (multiple occurrences allowed)]' \
+'--author=[Author of this patch (multiple occurrences allowed)]' \
+'--no-editor[Do not use an editor to write the patch name and description, even if the variable is set in the configuration file]' \
+'(--myers)--patience[Use patience diff instead of the default (Myers diff)]' \
+'(--patience)--myers[Use Myers diff]' \
+'-h[Prints help information]' \
+'--help[Prints help information]' \
+'-V[Prints version information]' \
+'--version[Prints version information]' \
+'::patch -- Patch to roll back.:_files' \
+&& ret=0
+;;
+(status)
+_arguments "${_arguments_options[@]}" \
+'--repository=[Local repository.]' \
+'-s[Output in short format]' \
+'--short[Output in short format]' \
+'-h[Prints help information]' \
+'--help[Prints help information]' \
+'-V[Prints version information]' \
+'--version[Prints version information]' \
+&& ret=0
+;;
+(deps)
+_arguments "${_arguments_options[@]}" \
+'--depth=[The depth of the dependencies graph]' \
+'*--repository=[Local repository.]' \
+'--branch=[Branch.]' \
+'-h[Prints help information]' \
+'--help[Prints help information]' \
+'-V[Prints version information]' \
+'--version[Prints version information]' \
+'::hash -- Hash of a patch.:_files' \
+&& ret=0
+;;
+(dependencies)
+_arguments "${_arguments_options[@]}" \
+'--depth=[The depth of the dependencies graph]' \
+'*--repository=[Local repository.]' \
+'--branch=[Branch.]' \
+'-h[Prints help information]' \
+'--help[Prints help information]' \
+'-V[Prints version information]' \
+'--version[Prints version information]' \
+'::hash -- Hash of a patch.:_files' \
+&& ret=0
+;;
+(tag)
+_arguments "${_arguments_options[@]}" \
+'--repository=[The repository where to record, defaults to the current directory.]' \
+'--branch=[The branch where to record, defaults to the current branch.]' \
+'--date=[The date to use to record the patch, default is now.]' \
+'-m+[The name of the patch to record]' \
+'--message=[The name of the patch to record]' \
+'-d+[The description of the patch to record]' \
+'--description=[The description of the patch to record]' \
+'-A+[Author of this patch (multiple occurrences allowed)]' \
+'--author=[Author of this patch (multiple occurrences allowed)]' \
+'--no-editor[Do not use an editor to write the patch name and description, even if the variable is set in the configuration file]' \
+'(--myers)--patience[Use patience diff instead of the default (Myers diff)]' \
+'(--patience)--myers[Use Myers diff]' \
+'-h[Prints help information]' \
+'--help[Prints help information]' \
+'-V[Prints version information]' \
+'--version[Prints version information]' \
+&& ret=0
+;;
+(sign)
+_arguments "${_arguments_options[@]}" \
+'--repository=[Path to the repository where the patches will be applied. Defaults to the repository containing the current directory.]' \
+'-h[Prints help information]' \
+'--help[Prints help information]' \
+'-V[Prints version information]' \
+'--version[Prints version information]' \
+&& ret=0
+;;
+(generate-completions)
+_arguments "${_arguments_options[@]}" \
+'--bash[Completions for Bash]' \
+'--zsh[Completions for Zsh]' \
+'--fish[Completions for Fish]' \
+'--powershell[Completions for Powershell]' \
+'-h[Prints help information]' \
+'--help[Prints help information]' \
+'-V[Prints version information]' \
+'--version[Prints version information]' \
+&& ret=0
+;;
+(grep)
+_arguments "${_arguments_options[@]}" \
+'--branch=[The branch to search, defaults to the current branch.]' \
+'-h[Prints help information]' \
+'--help[Prints help information]' \
+'-V[Prints version information]' \
+'--version[Prints version information]' \
+':regex -- Regex pattern to search for:_files' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" \
+'-h[Prints help information]' \
+'--help[Prints help information]' \
+'-V[Prints version information]' \
+'--version[Prints version information]' \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+}
+
+(( $+functions[_pijul_commands] )) ||
+_pijul_commands() {
+    local commands; commands=(
+        "log:List the patches applied to the given branch" \
+"info:Get information about the current repository, if any" \
+"init:Create a new repository" \
+"record:Record changes in the repository" \
+"unrecord:Unrecord some patches (remove them without reverting them)" \
+"add:Add a file to the repository" \
+"pull:Pull from a remote repository" \
+"push:Push to a remote repository" \
+"apply:Apply a patch" \
+"clone:Clone a remote branch" \
+"remove:Remove file from the repository" \
+"mv:Change file names" \
+"ls:List tracked files" \
+"revert:Rewrite the working copy from the pristine" \
+"patch:Output a patch" \
+"fork:Create a new branch" \
+"branches:List all branches" \
+"prune:Delete a branch in the local repository" \
+"checkout:Change the current branch" \
+"diff:Show what would be recorded if record were called" \
+"credit:Show what patch introduced each line of a file." \
+"dist:Produces a tar.gz archive of the repository" \
+"key:Manage signing and SSH keys" \
+"rollback:" \
+"status:Show working tree status" \
+"dependencies:Print the patch dependencies using the DOT syntax in stdout" \
+"tag:Create a tag, i.e. an empty patch with all patches on the branch as dependencies" \
+"sign:Add patch signatures" \
+"generate-completions:Generate shell completions for pijul to stdout" \
+"grep:Search repository files for regex" \
+"help:Prints this message or the help of the given subcommand(s)" \
+    )
+    _describe -t commands 'pijul commands' commands "$@"
+}
+(( $+functions[_pijul__add_commands] )) ||
+_pijul__add_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'pijul add commands' commands "$@"
+}
+(( $+functions[_pijul__apply_commands] )) ||
+_pijul__apply_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'pijul apply commands' commands "$@"
+}
+(( $+functions[_pijul__branches_commands] )) ||
+_pijul__branches_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'pijul branches commands' commands "$@"
+}
+(( $+functions[_pijul__checkout_commands] )) ||
+_pijul__checkout_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'pijul checkout commands' commands "$@"
+}
+(( $+functions[_pijul__clone_commands] )) ||
+_pijul__clone_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'pijul clone commands' commands "$@"
+}
+(( $+functions[_pijul__credit_commands] )) ||
+_pijul__credit_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'pijul credit commands' commands "$@"
+}
+(( $+functions[_pijul__dependencies_commands] )) ||
+_pijul__dependencies_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'pijul dependencies commands' commands "$@"
+}
+(( $+functions[_deps_commands] )) ||
+_deps_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'deps commands' commands "$@"
+}
+(( $+functions[_pijul__deps_commands] )) ||
+_pijul__deps_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'pijul deps commands' commands "$@"
+}
+(( $+functions[_pijul__diff_commands] )) ||
+_pijul__diff_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'pijul diff commands' commands "$@"
+}
+(( $+functions[_pijul__dist_commands] )) ||
+_pijul__dist_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'pijul dist commands' commands "$@"
+}
+(( $+functions[_pijul__fork_commands] )) ||
+_pijul__fork_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'pijul fork commands' commands "$@"
+}
+(( $+functions[_pijul__key__gen_commands] )) ||
+_pijul__key__gen_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'pijul key gen commands' commands "$@"
+}
+(( $+functions[_pijul__generate-completions_commands] )) ||
+_pijul__generate-completions_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'pijul generate-completions commands' commands "$@"
+}
+(( $+functions[_pijul__grep_commands] )) ||
+_pijul__grep_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'pijul grep commands' commands "$@"
+}
+(( $+functions[_pijul__help_commands] )) ||
+_pijul__help_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'pijul help commands' commands "$@"
+}
+(( $+functions[_pijul__key__help_commands] )) ||
+_pijul__key__help_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'pijul key help commands' commands "$@"
+}
+(( $+functions[_pijul__info_commands] )) ||
+_pijul__info_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'pijul info commands' commands "$@"
+}
+(( $+functions[_pijul__init_commands] )) ||
+_pijul__init_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'pijul init commands' commands "$@"
+}
+(( $+functions[_pijul__key_commands] )) ||
+_pijul__key_commands() {
+    local commands; commands=(
+        "upload:Upload keys to a remote server" \
+"gen:Generate keys. This command generates an SSH key if --signing-id is not given" \
+"register:Register a signature key given in binary on the standard input" \
+"help:Prints this message or the help of the given subcommand(s)" \
+    )
+    _describe -t commands 'pijul key commands' commands "$@"
+}
+(( $+functions[_pijul__log_commands] )) ||
+_pijul__log_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'pijul log commands' commands "$@"
+}
+(( $+functions[_pijul__ls_commands] )) ||
+_pijul__ls_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'pijul ls commands' commands "$@"
+}
+(( $+functions[_pijul__mv_commands] )) ||
+_pijul__mv_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'pijul mv commands' commands "$@"
+}
+(( $+functions[_pijul__patch_commands] )) ||
+_pijul__patch_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'pijul patch commands' commands "$@"
+}
+(( $+functions[_pijul__prune_commands] )) ||
+_pijul__prune_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'pijul prune commands' commands "$@"
+}
+(( $+functions[_pijul__pull_commands] )) ||
+_pijul__pull_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'pijul pull commands' commands "$@"
+}
+(( $+functions[_pijul__push_commands] )) ||
+_pijul__push_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'pijul push commands' commands "$@"
+}
+(( $+functions[_pijul__record_commands] )) ||
+_pijul__record_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'pijul record commands' commands "$@"
+}
+(( $+functions[_pijul__key__register_commands] )) ||
+_pijul__key__register_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'pijul key register commands' commands "$@"
+}
+(( $+functions[_pijul__remove_commands] )) ||
+_pijul__remove_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'pijul remove commands' commands "$@"
+}
+(( $+functions[_pijul__revert_commands] )) ||
+_pijul__revert_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'pijul revert commands' commands "$@"
+}
+(( $+functions[_pijul__rollback_commands] )) ||
+_pijul__rollback_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'pijul rollback commands' commands "$@"
+}
+(( $+functions[_pijul__sign_commands] )) ||
+_pijul__sign_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'pijul sign commands' commands "$@"
+}
+(( $+functions[_pijul__status_commands] )) ||
+_pijul__status_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'pijul status commands' commands "$@"
+}
+(( $+functions[_pijul__tag_commands] )) ||
+_pijul__tag_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'pijul tag commands' commands "$@"
+}
+(( $+functions[_pijul__unrecord_commands] )) ||
+_pijul__unrecord_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'pijul unrecord commands' commands "$@"
+}
+(( $+functions[_pijul__key__upload_commands] )) ||
+_pijul__key__upload_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'pijul key upload commands' commands "$@"
+}
+
+_pijul "$@"

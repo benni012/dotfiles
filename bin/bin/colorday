@@ -1,0 +1,24 @@
+#!/bin/sh
+
+bingwall > /tmp/colors
+convert /tmp/colors /tmp/colors.png
+cols=$(colors -hn5 < /tmp/colors.png)
+
+bgcolor=$(echo "$cols" | head -n1)
+
+cols=$(echo "$cols" | tail -n-4)
+color1=$(echo "$cols" | head -n1)
+cols=$(echo "$cols" | tail -n+2)
+color2=$(echo "$cols" | head -n1)
+cols=$(echo "$cols" | tail -n+2)
+color3=$(echo "$cols" | head -n1)
+cols=$(echo "$cols" | tail -n+2)
+color4=$(echo "$cols" | head -n1)
+
+printf ":root {\n"
+printf -- "--bgcolor: %s;\n" "$bgcolor"
+printf -- "--color1: %s;\n" "$color1"
+printf -- "--color2: %s;\n" "$color2"
+printf -- "--color3: %s;\n" "$color3"
+printf -- "--color4: %s;\n" "$color4"
+printf "}"
